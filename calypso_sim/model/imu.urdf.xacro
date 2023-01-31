@@ -13,13 +13,13 @@
             <collision>
                 <origin xyz="0 0 0" rpy="0 0 0"/>
                 <geometry>
-                    <box size="0.01 0.01 0.01"/>
+                    <box size="0.1 0.1 0.1"/>
                 </geometry>
             </collision>
             <visual>
                 <origin xyz="0 0 0" rpy="0 0 0"/>
                 <geometry>
-                    <box size="0.01 0.01 0.01"/>
+                    <box size="0.1 0.1 0.1"/>
                 </geometry>
                 <material name="blue"/>
             </visual>
@@ -32,14 +32,15 @@
 
 
         <gazebo reference="imu_${id}_link">
-            <plugin name="imu_plugin" filename="libgazebo_ros_imu.so">
-            <alwaysOn>true</alwaysOn>
-            <bodyName>base_footprint</bodyName>
-            <topicName>imu</topicName>
-            <serviceName>imu_service</serviceName>
-            <gaussianNoise>0.0</gaussianNoise>
-            <updateRate>20.0</updateRate>
+            <plugin name="imu_${id}_plugin" filename="libgazebo_ros_imu.so">
+                <alwaysOn>true</alwaysOn>
+                <bodyName>base_link</bodyName>
+                <topicName>imu_${id}</topicName>
+                <serviceName>imu_${id}_service</serviceName>
+                <gaussianNoise>0.0</gaussianNoise>
+                <updateRate>20.0</updateRate>
             </plugin>
         </gazebo>
+
     </xacro:macro>
 </robot>

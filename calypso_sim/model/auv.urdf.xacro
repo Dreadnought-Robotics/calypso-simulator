@@ -2,7 +2,7 @@
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="auv">
 
     <xacro:include filename="$(find calypso_sim)/model/camera.urdf.xacro"/>
-    <!-- <xacro:include filename="$(find calypso_sim)/model/imu.urdf.xacro"/> -->
+    <xacro:include filename="$(find calypso_sim)/model/imu.urdf.xacro"/>
     <xacro:include filename="$(find calypso_sim)/model/thrusters.urdf.xacro"/>
 
     <material name="red">
@@ -101,11 +101,11 @@
     <xacro:thruster_CW id="8" parent="base_link" xyz="-0.23 -0.23 0.06" rpy="0 1.57 2.182" axis="0 0 1">
     </xacro:thruster_CW>
 
-    <xacro:camera id="1" parent="base_link" xyz="0.3 -0.55 0.19" rpy="0 0 -1.57">
+    <xacro:camera id="1" parent="base_link" xyz="-0.02 -0.2 0.19" rpy="0 0 -1.57">
     </xacro:camera>
 
-    <!-- <xacro:imu id="1" parent="base_link" xyz="0.3 -0.55 0.19" rpy="0 0 -1.57">
-    </xacro:imu> -->
+    <xacro:imu id="1" parent="base_link" xyz="-0.02 0.1 0.06" rpy="0 0 -1.57">
+    </xacro:imu>
 
     <gazebo>
       <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
