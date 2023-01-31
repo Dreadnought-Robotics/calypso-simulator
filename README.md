@@ -2,7 +2,7 @@
 
 ## Setup
 
-### REQUIREMENT
+### REQUIREMENTS
 
 Tried and tested on ROS Noetic with Gazebo version 11
 Make sure gazebo ros 
