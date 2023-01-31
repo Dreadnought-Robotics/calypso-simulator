@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" id="imu">
+    
+    <xacro:macro name="imu" params="id parent xyz rpy">
+        
+        <joint name="imu_${id}_joint" type="fixed">
+            <origin xyz="${xyz}" rpy="${rpy}"/>
+            <parent link="${parent}"/>
+            <child link="imu_${id}"/>
+        </joint>
+        
+        <link name="imu_${id}">
+            <collision>
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <geometry>
+                    <box size="0.01 0.01 0.01"/>
+                </geometry>
+            </collision>
+            <visual>
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <geometry>
+                    <box size="0.01 0.01 0.01"/>
+                </geometry>
+                <material name="blue"/>
+            </visual>
+            <inertial>
+                <mass value="0.0001" />
+                <origin xyz="0 0 0" rpy="0 0 ${pi}"/>
+                <inertia ixx="0.0000001" ixy="0" ixz="0" iyy="0.0000001" iyz="0" izz="0.0000001" />
+            </inertial>
+        </link>
+
+
+        <gazebo reference="imu_${id}_link">
+            <plugin name="imu_plugin" filename="libgazebo_ros_imu.so">
+            <alwaysOn>true</alwaysOn>
+            <bodyName>base_footprint</bodyName>
+            <topicName>imu</topicName>
+            <serviceName>imu_service</serviceName>
+            <gaussianNoise>0.0</gaussianNoise>
+            <updateRate>20.0</updateRate>
+            </plugin>
+        </gazebo>
+    </xacro:macro>
+</robot>

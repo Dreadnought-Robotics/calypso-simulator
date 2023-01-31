@@ -1,0 +1,237 @@
+<?xml version='1.0'?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="thruster">
+
+  <xacro:property name="thrusterCCW_path" value="package://calypso_sim/meshes/thrusters/T200_Thruster_CCW/meshes/"/>
+  <xacro:property name="thrusterCW_path" value="package://calypso_sim/meshes/thrusters/T200_Thruster_CW/meshes/"/>
+
+   <xacro:macro name="thruster_CCW" params="id parent xyz rpy axis">
+    <link name="thruster_${id}_link">
+       <visual>
+        <material name="red"/>
+        <geometry>
+           <mesh filename="${thrusterCCW_path}T200_Thruster.dae" scale="1.5 1.5 1.5"/>
+           <!--<box size="0.1 0.1 0.1"/>-->
+        </geometry>
+      </visual>
+
+      <collision>
+        <geometry>
+          <mesh filename="${thrusterCCW_path}T200_Thruster.dae" scale="1.5 1.5 1.5"/>
+        </geometry>
+      </collision>
+
+      <inertial>
+        <mass value="3.44"/>
+        <inertia ixx="0" ixy="0.0" ixz="0.0" iyy="0" iyz="0.0" izz="0"/>
+      </inertial>
+
+    </link>
+
+    <joint name="thruster_${id}_to_body" type="fixed">
+      <parent link="${parent}"/>
+      <child link="thruster_${id}_link"/>
+      <origin rpy="${rpy}" xyz="${xyz}"/>
+    </joint>
+
+    <link name='prop_${id}'>
+      <inertial>
+        <mass value="0.10000000"/>
+        <inertia ixx="0.00002540" ixy="0.00000000" ixz="0.00000000" iyy="0.00002541" iyz="-0.00000000" izz="0.00003829"/>
+      </inertial>
+
+      <visual>
+        <geometry>
+          <mesh filename="${thrusterCCW_path}T200_Prop_CCW.dae" scale="1.5 1.5 1.5"/>
+        </geometry>
+      </visual>
+
+      <collision>
+        <geometry>
+          <mesh filename="${thrusterCCW_path}T200_Prop_CCW.dae" scale="1.5 1.5 1.5"/>
+        </geometry>
+      </collision>
+
+    </link>
+
+    <joint name='prop_${id}_to_thruster_${id}_joint' type='continuous'>
+      <parent link="thruster_${id}_link"/>
+      <child link="prop_${id}"/>
+      <axis xyz="${axis}"/>
+    </joint>
+
+    <transmission name="thruster_${id}_trainsmission" >
+      <type>transmission_interface/SimpleTransmission</type>	
+        <joint name="prop_${id}_to_thruster_${id}_joint">
+          <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+        </joint>
+      <actuator name="BLDC_motor_${id}">
+        <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+	  </transmission>
+
+    <gazebo>
+      <plugin name='blade_1_${id}' filename='libLiftDragPlugin.so'>
+        <a0>0.3</a0>
+        <alpha_stall>1.4</alpha_stall>
+        <cla>4.2500</cla>
+        <cda>0.10</cda>
+        <cma>0.00</cma>
+        <cla_stall>-0.025</cla_stall>
+        <cda_stall>0.0</cda_stall>
+        <cma_stall>0.0</cma_stall>
+        <area>0.002</area>
+        <air_density>1000</air_density>
+        <cp>0.084 0 0</cp>
+        <forward>0 -1 0</forward>
+        <upward>0 0 1</upward>
+        <link_name>prop_${id}</link_name>
+      </plugin>
+
+      <plugin name='blade_2_${id}' filename='libLiftDragPlugin.so'>
+        <a0>0.3</a0>
+        <alpha_stall>1.4</alpha_stall>
+        <cla>4.2500</cla>
+        <cda>0.10</cda>
+        <cma>0.00</cma>
+        <cla_stall>-0.025</cla_stall>
+        <cda_stall>0.0</cda_stall>
+        <cma_stall>0.0</cma_stall>
+        <area>0.002</area>
+        <air_density>1000</air_density>
+        <cp>-0.084 0 0</cp>
+        <forward>0 1 0</forward>
+        <upward>0 0 1</upward>
+        <link_name>prop_${id}</link_name>
+      </plugin>
+
+    </gazebo>
+
+    <gazebo>
+      <static>0</static>
+      <allow_auto_disable>0</allow_auto_disable>
+    </gazebo>
+
+
+     <gazebo reference="prop_${id}">
+        <material>Gazebo/Red</material>
+    </gazebo>
+
+  </xacro:macro>
+
+  <xacro:macro name="thruster_CW" params="id parent xyz rpy axis">
+    <link name="thruster_${id}_link">
+       <visual>
+        <geometry>
+           <mesh filename="${thrusterCW_path}T200_Thruster.dae" scale="1.5 1.5 1.5"/>
+           <!--<box size="0.1 0.1 0.1"/>-->
+        </geometry>
+        <material name="red"/>
+      </visual>
+
+      <collision>
+        <geometry>
+          <mesh filename="${thrusterCW_path}T200_Thruster.dae" scale="1.5 1.5 1.5"/>
+        </geometry>
+      </collision>
+
+      <inertial>
+        <mass value="3.44"/>
+        <inertia ixx="0" ixy="0.0" ixz="0.0" iyy="0" iyz="0.0" izz="0"/>
+      </inertial>
+
+    </link>
+
+    <joint name="thruster_${id}_to_body" type="fixed">
+      <parent link="${parent}"/>
+      <child link="thruster_${id}_link"/>
+      <origin rpy="${rpy}" xyz="${xyz}"/>
+    </joint>
+
+    <link name='prop_${id}'>
+      <inertial>
+        <mass value="0.10000000"/>
+        <inertia ixx="0.00002540" ixy="0.00000000" ixz="0.00000000" iyy="0.00002541" iyz="-0.00000000" izz="0.00003829"/>
+      </inertial>
+      
+      <visual>
+        <geometry>
+          <mesh filename="${thrusterCW_path}T200_Prop_CW.dae" scale="1.5 1.5 1.5"/>
+        </geometry>
+        <material name="green"/>
+      </visual>
+
+      <collision>
+        <geometry>
+          <mesh filename="${thrusterCW_path}T200_Prop_CW.dae" scale="1.5 1.5 1.5"/>
+        </geometry>
+      </collision>
+
+    </link>
+
+    <joint name='prop_${id}_to_thruster_${id}_joint' type='continuous'>
+      <parent link="thruster_${id}_link"/>
+      <child link="prop_${id}"/>
+      <axis xyz="${axis}"/>
+    </joint>
+
+    <transmission name="thruster_${id}_trainsmission" >
+      <type>transmission_interface/SimpleTransmission</type>	
+        <joint name="prop_${id}_to_thruster_${id}_joint">
+          <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+        </joint>
+      <actuator name="BLDC_motor_${id}">
+        <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+	  </transmission>
+
+    <gazebo>
+      <plugin name='blade_1_${id}' filename='libLiftDragPlugin.so'>
+        <a0>0.3</a0>
+        <alpha_stall>1.4</alpha_stall>
+        <cla>4.2500</cla>
+        <cda>0.10</cda>
+        <cma>0.00</cma>
+        <cla_stall>-0.025</cla_stall>
+        <cda_stall>0.0</cda_stall>
+        <cma_stall>0.0</cma_stall>
+        <area>0.002</area>
+        <air_density>1000</air_density>
+        <cp>0.084 0 0</cp>
+        <forward>0 1 0</forward>
+        <upward>0 0 1</upward>
+        <link_name>prop_${id}</link_name>
+      </plugin>
+
+      <plugin name='blade_2_${id}' filename='libLiftDragPlugin.so'>
+        <a0>0.3</a0>
+        <alpha_stall>1.4</alpha_stall>
+        <cla>4.2500</cla>
+        <cda>0.10</cda>
+        <cma>0.00</cma>
+        <cla_stall>-0.025</cla_stall>
+        <cda_stall>0.0</cda_stall>
+        <cma_stall>0.0</cma_stall>
+        <area>0.002</area>
+        <air_density>1000</air_density>
+        <cp>-0.084 0 0</cp>
+        <forward>0 -1 0</forward>
+        <upward>0 0 1</upward>
+        <link_name>prop_${id}</link_name>
+      </plugin>
+    </gazebo>
+
+    <gazebo>
+      <static>0</static>
+      <allow_auto_disable>0</allow_auto_disable>
+    </gazebo>
+    
+
+     <gazebo reference="prop_${id}">
+        <material>Gazebo/Green</material>
+    </gazebo>
+
+  </xacro:macro>
+
+</robot>

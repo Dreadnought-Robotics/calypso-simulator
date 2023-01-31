@@ -1,0 +1,6 @@
+devel_space: /home/dafodilrat/auv/src/translation_layer/devel
+install: false
+install_space: /home/dafodilrat/auv/src/translation_layer/install
+profile: default
+source_space: /home/dafodilrat/auv/src/translation_layer/src
+workspace: /home/dafodilrat/auv/src/translation_layer

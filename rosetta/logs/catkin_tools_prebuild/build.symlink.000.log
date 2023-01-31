@@ -1,0 +1,12 @@
+Symlinking /home/dafodilrat/auv/src/translation_layer/devel/./_setup_util.py
+Symlinking /home/dafodilrat/auv/src/translation_layer/devel/./env.sh
+Symlinking /home/dafodilrat/auv/src/translation_layer/devel/./cmake.lock
+Symlinking /home/dafodilrat/auv/src/translation_layer/devel/./local_setup.bash
+Symlinking /home/dafodilrat/auv/src/translation_layer/devel/./setup.sh
+Symlinking /home/dafodilrat/auv/src/translation_layer/devel/./local_setup.sh
+Symlinking /home/dafodilrat/auv/src/translation_layer/devel/./setup.bash
+Symlinking /home/dafodilrat/auv/src/translation_layer/devel/./local_setup.zsh
+Symlinking /home/dafodilrat/auv/src/translation_layer/devel/./setup.zsh
+Symlinking /home/dafodilrat/auv/src/translation_layer/devel/lib/pkgconfig/catkin_tools_prebuild.pc
+Symlinking /home/dafodilrat/auv/src/translation_layer/devel/share/catkin_tools_prebuild/cmake/catkin_tools_prebuildConfig-version.cmake
+Symlinking /home/dafodilrat/auv/src/translation_layer/devel/share/catkin_tools_prebuild/cmake/catkin_tools_prebuildConfig.cmake
