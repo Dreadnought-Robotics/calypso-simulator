@@ -34,15 +34,11 @@ class rosetta :
     
     self.rate = rospy.Rate(10)
 
-    self.gypseas=rospy.Subscriber("converter", gypseas, self.talker1)
-    self.dolphins=rospy.Subscriber("converter", dolphins, self.talker2)
-    
-    rospy.spin()
 
 
   def converter(self,x):
     # X=pwm Y=rpm
-    coeffs = pickle.load(open('src/translation_layer/pickle/coeffs.pickle', 'rb'))
+    coeffs = pickle.load(open("coeffs.pickle", 'rb'))
     if (x>1470 and x<1530):
       0
     else:
@@ -68,6 +64,9 @@ class rosetta :
 
     while True:
 
+      print(self.t1)
+      self.gypseas=rospy.Subscriber("/gypseas", gypseas, self.talker1)
+      self.dolphins=rospy.Subscriber("/dolphins", dolphins, self.talker2)
       self.PBLDC_1.publish(self.converter(self.t1))
       self.PBLDC_2.publish(self.converter(self.t2))
       self.PBLDC_3.publish(self.converter(self.t3))
@@ -78,6 +77,7 @@ class rosetta :
       self.PBLDC_8.publish(self.converter(self.d4))
 
       self.rate.sleep()
+      rospy.spin()
 
 if __name__=='__main__':
 
