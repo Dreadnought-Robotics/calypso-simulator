@@ -1,0 +1,8 @@
+prefix=/home/dafodilrat/auv/src/my_robot_urdf/build/devel
+
+Name: my_robot_urdf
+Description: Description of my_robot_urdf
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

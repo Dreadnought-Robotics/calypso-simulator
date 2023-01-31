@@ -1,0 +1,6 @@
+devel_space: /home/dafodilrat/auv_res/src/auv_control/devel
+install: false
+install_space: /home/dafodilrat/auv_res/src/auv_control/install
+profile: default
+source_space: /home/dafodilrat/auv_res/src/auv_control/src
+workspace: /home/dafodilrat/auv_res/src/auv_control

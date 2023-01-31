@@ -1,0 +1,2 @@
+- setup-file:
+    local-name: /home/dafodilrat/auv/src/my_robot_urdf/build/devel/setup.sh

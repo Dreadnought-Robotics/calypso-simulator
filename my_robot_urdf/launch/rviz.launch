@@ -1,0 +1,30 @@
+<?xml version="1.0" ?>
+<launch>
+    <arg name="debug" default="false" />
+    <arg name="gui" default="true" />
+    <arg name="pause" default="false" />
+    <arg name="rvizconfig" default='$(find my_robot_urdf)/config/urdf.rviz'/>
+    <param name="robot_description" command="$(find xacro)/xacro  $(find my_robot_urdf)/model/auv.urdf.xacro"  /> 
+    
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)" required="true" />
+
+    <node name="RSP" pkg="robot_state_publisher" type="robot_state_publisher" respawn="false" output="screen">
+      <param name="publish_frequency" type="double" value="5.0" />
+    </node>
+  
+    <node name="JSP" pkg="joint_state_publisher" type="joint_state_publisher" output="screen"/>
+
+    <rosparam command="load" file="$(find my_robot_urdf)/config/controllers.yaml"/>
+    
+  <node name="Controller_Spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" args="
+    joint_state_controller 
+    prop_1_to_thruster_1_joint_controller 
+    prop_2_to_thruster_2_joint_controller 
+    prop_3_to_thruster_3_joint_controller 
+    prop_4_to_thruster_4_joint_controller
+    prop_5_to_thruster_5_joint_controller
+    prop_6_to_thruster_6_joint_controller
+    prop_7_to_thruster_7_joint_controller
+    prop_8_to_thruster_8_joint_controller"/>
+    
+</launch>

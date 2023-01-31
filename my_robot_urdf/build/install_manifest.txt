@@ -1,0 +1,13 @@
+/usr/local/_setup_util.py
+/usr/local/env.sh
+/usr/local/setup.bash
+/usr/local/local_setup.bash
+/usr/local/setup.sh
+/usr/local/local_setup.sh
+/usr/local/setup.zsh
+/usr/local/local_setup.zsh
+/usr/local/.rosinstall
+/usr/local/lib/pkgconfig/my_robot_urdf.pc
+/usr/local/share/my_robot_urdf/cmake/my_robot_urdfConfig.cmake
+/usr/local/share/my_robot_urdf/cmake/my_robot_urdfConfig-version.cmake
+/usr/local/share/my_robot_urdf/package.xml

@@ -1,0 +1,42 @@
+<?xml version='1.0'?>
+<sdf version='1.5'>
+  <model name='Sphere'>
+    <pose>0 0 0 0 0 0</pose>
+    <link name='base_link'>
+      <inertial>
+        <mass>10</mass>
+        <inertia>
+          <ixx>1</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1</iyy>
+          <iyz>0</iyz>
+          <izz>1</izz>
+        </inertia>
+      </inertial>
+      <visual name='base_link_visual'>
+        <geometry>
+          <sphere>
+            <radius>0.15</radius>
+          </sphere>
+        </geometry>
+      </visual>
+    </link>
+
+    <!-- buoyancy plugin -->
+    <plugin name="freebuoyancy_gazebo" filename="libfreebuoyancy_gazebo.so">
+      <descriptionParam>robot_description</descriptionParam>
+      <fluidTopic>current</fluidTopic>
+      <alwaysOn>true</alwaysOn>
+      <surface>0 0 0</surface>
+      <updateRate>.001</updateRate>
+
+      <link name='base_link'>
+        <buoyancy>
+          <compensation>1.01</compensation>
+          <origin xyz= "0 0 0"/>
+        </buoyancy>
+      </link>
+    </plugin>
+  </model>
+</sdf>

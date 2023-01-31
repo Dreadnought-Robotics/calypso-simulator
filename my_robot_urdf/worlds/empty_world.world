@@ -1,0 +1,7 @@
+<sdf version='1.7'>
+  <world name="underwater">
+    <include>
+      <uri>model://sun</uri>
+    </include>
+  </world>
+</sdf>

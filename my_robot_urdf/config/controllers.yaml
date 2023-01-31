@@ -1,0 +1,46 @@
+prop_1_to_thruster_1_joint_controller:
+  type: velocity_controllers/JointVelocityController
+  joint:  prop_1_to_thruster_1_joint
+prop_2_to_thruster_2_joint_controller:
+  type: velocity_controllers/JointVelocityController
+  joint: prop_2_to_thruster_2_joint
+prop_3_to_thruster_3_joint_controller:
+  type: velocity_controllers/JointVelocityController
+  joint: prop_3_to_thruster_3_joint
+prop_4_to_thruster_4_joint_controller:
+  type: velocity_controllers/JointVelocityController
+  joint: prop_4_to_thruster_4_joint
+prop_5_to_thruster_5_joint_controller:
+   type: velocity_controllers/JointVelocityController
+   joint: prop_5_to_thruster_5_joint
+prop_6_to_thruster_6_joint_controller:
+   type: velocity_controllers/JointVelocityController
+   joint: prop_6_to_thruster_6_joint
+prop_7_to_thruster_7_joint_controller:
+   type: velocity_controllers/JointVelocityController
+   joint: prop_7_to_thruster_7_joint
+prop_8_to_thruster_8_joint_controller:
+   type: velocity_controllers/JointVelocityController
+   joint: prop_8_to_thruster_8_joint   
+
+# /gazebo_ros_control:   
+#   pid_gains:
+#     prop_1_to_thruster_1_joint:
+#       p: 100.0
+#       i: 0.01 
+#       d: 10.0
+
+#     prop_2_to_thruster_2_joint:
+#       p: 100.0
+#       i: 0.01 
+#       d: 10.0
+
+#     prop_3_to_thruster_3_joint:
+#       p: 100.0
+#       i: 0.01 
+#       d: 10.0
+
+#     prop_4_to_thruster_4_joint:
+#       p: 100.0
+#       i: 0.01 
+#       d: 10.0

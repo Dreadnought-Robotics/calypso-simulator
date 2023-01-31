@@ -1,0 +1,111 @@
+<?xml version='1.0'?>
+<sdf version='1.6'>
+  <model name='T200_Thruster_CW'>
+
+    <link name='thruster_link'>
+      <pose>0 0 0 0 0 0</pose>
+      <inertial>
+        <mass>0.344</mass>
+        <inertia>
+          <ixx>0</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0</iyy>
+          <iyz>0</iyz>
+          <izz>0</izz>
+        </inertia>
+      </inertial>
+      <visual name='thruster_link_visual'>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://T200_Thruster_CW/meshes/T200_Thruster.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+
+    <link name='prop'>
+      <pose>0 0 0 0 0 0</pose>
+      <inertial>
+        <mass>1e-10</mass>
+        <inertia>
+          <ixx>0</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0</iyy>
+          <iyz>0</iyz>
+          <izz>0</izz>
+        </inertia>
+      </inertial>
+      <visual name='prop_visual'>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://T200_Thruster_CW/meshes/T200_Prop_CW.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='Prop_joint' type='revolute'>
+      <parent>thruster_link</parent>
+      <child>prop</child>
+      <pose frame=''>0 0 0 0 0 0</pose>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <use_parent_model_frame>0</use_parent_model_frame>
+      </axis>
+    </joint>
+
+    <plugin name='blade_1' filename='libLiftDragPlugin.so'>
+      <a0>0.3</a0>
+      <alpha_stall>1.4</alpha_stall>
+      <cla>4.2500</cla>
+      <cda>0.10</cda>
+      <cma>0.00</cma>
+      <cla_stall>-0.025</cla_stall>
+      <cda_stall>0.0</cda_stall>
+      <cma_stall>0.0</cma_stall>
+      <area>0.002</area>
+      <air_density>1000</air_density>
+      <cp>0.084 0 0</cp>
+      <forward>0 1 0</forward>
+      <upward>0 0 1</upward>
+      <link_name>prop</link_name>
+    </plugin>
+
+    <plugin name='blade_2' filename='libLiftDragPlugin.so'>
+      <a0>0.3</a0>
+      <alpha_stall>1.4</alpha_stall>
+      <cla>4.2500</cla>
+      <cda>0.10</cda>
+      <cma>0.00</cma>
+      <cla_stall>-0.025</cla_stall>
+      <cda_stall>0.0</cda_stall>
+      <cma_stall>0.0</cma_stall>
+      <area>0.002</area>
+      <air_density>1000</air_density>
+      <cp>-0.084 0 0</cp>
+      <forward>0 -1 0</forward>
+      <upward>0 0 1</upward>
+      <link_name>prop</link_name>
+    </plugin>
+
+    <plugin name='freebuoyancy_gazebo' filename='libfreebuoyancy_gazebo.so'>
+      <descriptionParam>robot_description</descriptionParam>
+      <fluidTopic>current</fluidTopic>
+      <alwaysOn>true</alwaysOn>
+      <surface>0 0 0</surface>
+      <updateRate>.001</updateRate>
+      <link name='thruster_link'>
+        <buoyancy>
+          <compensation>1.0</compensation>
+          <origin xyz='0 0 0'/>
+        </buoyancy>
+      </link>
+    </plugin>
+
+    <static>0</static>
+    <allow_auto_disable>1</allow_auto_disable>
+  </model>
+</sdf>
