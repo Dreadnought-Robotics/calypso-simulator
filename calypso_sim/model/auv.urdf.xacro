@@ -60,7 +60,7 @@
       </collision>
     
       <inertial>
-        <mass value="120"/>
+        <mass value="160"/>
         <inertia ixx="466338.03533197" ixy="0.00022747" ixz="-0.00184206" iyy="846140.53520644" iyz="-13851.49143136" izz="547835.76597596"/>
       </inertial>
 
