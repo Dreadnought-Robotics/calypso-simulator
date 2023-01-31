@@ -1,4 +1,4 @@
 <?xml version="1.0" ?>
 <launch>
-  <node name="teleop" pkg="auv_control" type="teleop_node"/>
+  <node name="teleop" pkg="auv_control" type="teleop_node" output="screen"/>
 </launch>
