@@ -10,7 +10,7 @@ class rosetta :
 
   def __init__(self):
 
-    rospy.init_node('rosetta', anonymous=False)
+    rospy.init_node('rosetta_thruster', anonymous=False)
     
     print(rospy.get_name())
     
@@ -65,8 +65,8 @@ class rosetta :
     while True:
 
       print(self.t1)
-      self.gypseas=rospy.Subscriber("/gypseas", gypseas, self.talker1)
-      self.dolphins=rospy.Subscriber("/dolphins", dolphins, self.talker2)
+      self.gypseas=rospy.Subscriber("/calypso/gypseas", gypseas, self.talker1)
+      self.dolphins=rospy.Subscriber("calypso/dolphins", dolphins, self.talker2)
       self.PBLDC_1.publish(self.converter(self.t1))
       self.PBLDC_2.publish(self.converter(self.t2))
       self.PBLDC_3.publish(self.converter(self.t3))

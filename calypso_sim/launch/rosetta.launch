@@ -1,4 +1,7 @@
 <?xml version="1.0" ?>
 <launch>
-  <node name="rosetta" pkg="rosetta" type="rosetta.py" output="screen"/>
+  <node name="rosetta_thruster" pkg="rosetta" type="thruster.py" output="screen"/>a
+  <node name="rosetta_imu" pkg="rosetta" type="imu.py" output="screen"/>
+
 </launch>
+
