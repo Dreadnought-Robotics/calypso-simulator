@@ -1,8 +1,8 @@
 import rospy
 from std_msgs.msg import Float64
 from std_msgs.msg import Int64
-from calypso_imu import buoy
-from gazebo_msgs import Imu
+from calypso_msgs.msg import buoy
+from gazebo_msgs.msg import Imu
 import pickle
 import math
 

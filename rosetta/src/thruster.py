@@ -1,8 +1,8 @@
 import rospy
 from std_msgs.msg import Float64
 from std_msgs.msg import Int64
-from thruster.msg import gypseas
-from thruster.msg import dolphins
+from calypso_msgs.msg import gypseas
+from calypso_msgs.msg import dolphins
 import pickle
 
 
@@ -67,14 +67,23 @@ class rosetta :
       print(self.t1)
       self.gypseas=rospy.Subscriber("/calypso/gypseas", gypseas, self.talker1)
       self.dolphins=rospy.Subscriber("calypso/dolphins", dolphins, self.talker2)
-      self.PBLDC_1.publish(self.converter(self.t1))
-      self.PBLDC_2.publish(self.converter(self.t2))
-      self.PBLDC_3.publish(self.converter(self.t3))
-      self.PBLDC_4.publish(self.converter(self.t4))
-      self.PBLDC_5.publish(self.converter(self.d1))
-      self.PBLDC_6.publish(self.converter(self.d2))
-      self.PBLDC_7.publish(self.converter(self.d3))
-      self.PBLDC_8.publish(self.converter(self.d4))
+      self.t=Float64()
+      self.t.data=self.converter(self.t1)
+      self.PBLDC_1.publish(self.t)
+      self.t.data=self.converter(self.t2)
+      self.PBLDC_2.publish(self.t)
+      self.t.data=self.converter(self.t3)
+      self.PBLDC_3.publish(self.t)
+      self.t.data=self.converter(self.t4)
+      self.PBLDC_4.publish(self.t)
+      self.t.data=self.converter(self.d1)
+      self.PBLDC_5.publish(self.t)
+      self.t.data=self.converter(self.d2)
+      self.PBLDC_6.publish(self.t)
+      self.t.data=self.converter(self.d3)
+      self.PBLDC_7.publish(self.t)
+      self.t.data=self.converter(self.d4)
+      self.PBLDC_8.publish(self.t)
 
       self.rate.sleep()
       rospy.spin()
