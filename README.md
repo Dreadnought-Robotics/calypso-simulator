@@ -1,5 +1,7 @@
 # calypso-sim
 
+Ros noetic based autonomous underwatever drone simulator
+
 ## Setup
 
 ### REQUIREMENTS
