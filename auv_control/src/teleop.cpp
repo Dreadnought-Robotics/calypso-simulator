@@ -38,7 +38,7 @@ float BLDC_8=0.0;
 float MIN_THRUST=0.0;
 float MAX_THRUST=90.0;
 float LIFT=0;
-float gain=5;
+float gain=3;
 
 
 Publisher PBLDC_1;
@@ -220,6 +220,7 @@ class movements
         BLDC_6=0;
         BLDC_7=0;
         BLDC_8=0;
+        PublishV();
     }
 
 };
