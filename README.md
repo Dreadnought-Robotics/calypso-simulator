@@ -51,12 +51,12 @@ sudo apt-get install ros-noetic-gazebo-ros-pkgs ros-noetic-gazebo-ros-control
 
 Gazebo sim launcher:
 ```bash
-roslaunch my_robot_urdf blue.launch
+roslaunch calypso_sim blue.launch
 ```
 
 Teleop Launcher:
 ```bash
-roslaunch my_robot_urdf teleop.launch 
+roslaunch calypso_sim teleop.launch 
 ```
 
 Command to look at all topics:
