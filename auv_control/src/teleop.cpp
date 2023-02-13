@@ -18,22 +18,14 @@ using namespace ros;
 // /auv/BLDC_7_motor_controller/command
 // /auv/BLDC_8_motor_controller/command
 
-// 1:right upper 
-// 2:left upper
-// 3:left lower
-// 4:right lower
+// 1:left upper 
+// 2:right upper
+// 3:right lower
+// 4:left lower
 // 5:front left
-// 6:back lower
-// 7:back left
-// 8:front right
-
-// 1->2 
-// 2->1
-// 3->4
-// 4->3 
-// 6->7 
-// 7->8
-// 8->6 
+// 6:front right
+// 7:back right
+// 8:back left
 
 float BLDC_1=0.0;
 float BLDC_2=0.0;
@@ -44,9 +36,9 @@ float BLDC_6=0.0;
 float BLDC_7=0.0;
 float BLDC_8=0.0;
 float MIN_THRUST=0.0;
-float MAX_THRUST=90.0;
+float MAX_THRUST=29.93;
 float LIFT=0;
-float gain=3;
+float gain=2;
 
 
 Publisher PBLDC_1;
@@ -157,25 +149,13 @@ class movements
         float y=x*gain;
         if(x>0)
         {
-            // reset_z();
             BLDC_2+=y;
             BLDC_3+=y;
-
-            // if(BLDC_6 >0 && BLDC_7 >0)
-            // {
-            //     LIFT=BLDC_1;
-            // } 
         }
         else
         {
-            // reset_z();
             BLDC_1+=abs(y);
             BLDC_4+=abs(y);
-            
-            // if(BLDC_5 >0 && BLDC_8 >0)
-            // {
-            //     LIFT=BLDC_2;
-            // } 
         }
         PublishV();
     }
@@ -240,15 +220,15 @@ Reading from the keyboard and Publishing to Auv!
 Moving around:
    w :move front
    s :move back
+   a :left
+   d :right
    i :pitch up
    k :pitch down
    j :yaw left
    k :yaw righ
    y :move up
    h :move down
-
-anything else : stop
-
+   r :reset
 
 CTRL-C to quit
 
@@ -357,7 +337,6 @@ int main(int argc, char **argv)
         { 
             auv.reset();
         }
-
 
         spinOnce();
         loop_rate.sleep();
