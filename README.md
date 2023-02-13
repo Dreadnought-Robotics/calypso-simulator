@@ -59,7 +59,7 @@ Teleop Launcher:
 roslaunch calypso_sim teleop.launch 
 ```
 
-Command to look at all topics:
+Command to look at all topic:
 ```bash
 rostopic list
 ```
