@@ -34,7 +34,6 @@
         </link>
         
         
-        
         <gazebo reference="camera_${id}">
             <sensor type="camera" name="camera">
                 <update_rate>30.0</update_rate>
@@ -58,7 +57,7 @@
                 <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
                     <alwaysOn>true</alwaysOn>
                     <updateRate>0.0</updateRate>
-                    <cameraName>calypso/camera_${id}</cameraName>
+                    <cameraName>calypso_sim/camera_${id}</cameraName>
                     <imageTopicName>image</imageTopicName>
                     <cameraInfoTopicName>info</cameraInfoTopicName>
                     <frameName>camera_${id}</frameName>

@@ -21,8 +21,9 @@ class rosetta :
     self.roll=0
     self.pitch=0
     self.yaw=0
+    self.w=0
 
-    self.PBLDC_1 = rospy.Publisher('/rosetta/imu', Float64, queue_size=1000)
+    self.PBLDC_1 = rospy.Publisher('/rosetta/imu/data', buoy, queue_size=1000)
     
     self.rate = rospy.Rate(10)
   
@@ -52,6 +53,7 @@ class rosetta :
     self.y=imu.orientation.y
     self.z=imu.orientation.z
     self.roll,self.pitch,self.yaw=self.convert(imu.orientation.w,self.x,self.y,self.z)
+    self.w=imu.orientation.w
     
   def start(self):
 
@@ -65,9 +67,9 @@ class rosetta :
       self.b.pitch=self.pitch
       self.b.yaw=self.yaw
 
-      self.imu=rospy.Subscriber("/calypso/imu", buoy, self.talker1)
+      self.imu=rospy.Subscriber("/calypso_sim/imu/data",Imu, self.talker1)
       self.imu.publish(self.b)
-
+      
       self.rate.sleep()
       rospy.spin()
 

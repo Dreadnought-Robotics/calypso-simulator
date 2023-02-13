@@ -32,9 +32,9 @@
 
             <plugin name="gazebo_ros_imu_${id}_controller" filename="libgazebo_ros_imu.so">
 
-                <topicName>/calypso/imu/data</topicName>
+                <topicName>/calypso_sim/imu/data</topicName>
 
-                <serviceName>/calypso/imu/service</serviceName>
+                <serviceName>/calypso_sim/imu/service</serviceName>
 
                 <bodyName>base_link</bodyName>
 
