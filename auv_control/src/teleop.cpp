@@ -27,6 +27,14 @@ using namespace ros;
 // 7:back left
 // 8:front right
 
+// 1->2 
+// 2->1
+// 3->4
+// 4->3 
+// 6->7 
+// 7->8
+// 8->6 
+
 float BLDC_1=0.0;
 float BLDC_2=0.0;
 float BLDC_3=0.0;
@@ -150,8 +158,8 @@ class movements
         if(x>0)
         {
             // reset_z();
-            BLDC_1+=y;
-            BLDC_4+=y;
+            BLDC_2+=y;
+            BLDC_3+=y;
 
             // if(BLDC_6 >0 && BLDC_7 >0)
             // {
@@ -161,8 +169,8 @@ class movements
         else
         {
             // reset_z();
-            BLDC_2+=abs(y);
-            BLDC_3+=abs(y);
+            BLDC_1+=abs(y);
+            BLDC_4+=abs(y);
             
             // if(BLDC_5 >0 && BLDC_8 >0)
             // {
@@ -178,16 +186,16 @@ class movements
         if(x>0)
         {
             BLDC_5=0;
-            BLDC_8=0;
+            BLDC_6=0;
             BLDC_7+=y;
-            BLDC_6+=y;
+            BLDC_8+=y;
         }
         else
         {
             BLDC_7=0;
-            BLDC_6=0;
-            BLDC_8+=abs(y);
+            BLDC_8=0;
             BLDC_5+=abs(y);
+            BLDC_6+=abs(y);
         }
         PublishV();
     }
@@ -198,16 +206,16 @@ class movements
         if(x>0)
         {
             BLDC_5=0;
-            BLDC_6=0;
-            BLDC_7+=abs(y);
+            BLDC_7=0;
             BLDC_8+=abs(y);
+            BLDC_6+=abs(y);
         }
         else
         {   
             BLDC_5+=abs(y);
-            BLDC_6+=abs(y);
-            BLDC_7=0;
+            BLDC_7+=abs(y);
             BLDC_8=0;
+            BLDC_6=0;
         }
     }   
     void reset()

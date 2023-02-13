@@ -66,7 +66,7 @@ class rosetta :
 
       print(self.t1)
       self.gypseas=rospy.Subscriber("/calypso/gypseas", gypseas, self.talker1)
-      self.dolphins=rospy.Subscriber("calypso/dolphins", dolphins, self.talker2)
+      self.dolphins=rospy.Subscriber("/calypso/dolphins", dolphins, self.talker2)
       self.t=Float64()
       self.t.data=self.converter(self.t1)
       self.PBLDC_1.publish(self.t)
