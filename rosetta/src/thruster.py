@@ -6,6 +6,9 @@ from calypso_msgs.msg import dolphins
 import pickle
 
 
+r = 0.0762/2
+π = 3.14159265359
+
 class rosetta :
 
   def __init__(self):
@@ -38,13 +41,18 @@ class rosetta :
 
   def converter(self,x):
     # X=pwm Y=rpm
-    x=x-1500
-    coeffs = pickle.load(open("coeffs.pickle", 'rb'))
+    coeffs = pickle.load(open(r'pickle/coeffs.pickle', 'rb'))
     if (x>1470 and x<1530):
-      0
+      y = 0
+      v = 2 * π * r * y / 60
     else:
-      y= x**3*coeffs[0] + x**2*coeffs[1] + x*coeffs[2] + coeffs[3] 
-      v = 2 * π* r * w / 60
+      y = x**3*coeffs[0] + x**2*coeffs[1] + x*coeffs[2] + coeffs[3] 
+      v = 2 * π * r * y / 60
+
+    if (x<1000 or x>2000):
+      y = 0
+      v = 2 * π * r * y / 60
+    # print(x,y)
     return y
   
 
@@ -65,8 +73,6 @@ class rosetta :
   def start(self):
 
     while True:
-
-      print(self.t1)
       self.gypseas=rospy.Subscriber("/calypso/gypseas", gypseas, self.talker1)
       self.dolphins=rospy.Subscriber("/calypso/dolphins", dolphins, self.talker2)
       self.t=Float64()
@@ -88,7 +94,6 @@ class rosetta :
       self.PBLDC_8.publish(self.t)
 
       self.rate.sleep()
-      rospy.spin()
 
 if __name__=='__main__':
 
