@@ -1,7 +1,7 @@
 #! /usr/bin/python3
 import pandas as pd
 import csv
-from calypso_imu.msg import buoy
+from calypso_msgs.msg import buoy
 from datetime import datetime
 import time
 import rospy
@@ -18,7 +18,7 @@ def write_into_csv(name,row):
 
 def listener(imu_msg):
   row = [time.time() - start_time, imu_msg.x, imu_msg.y, imu_msg.z, imu_msg.w]
-  write_into_csv(csv_name, row)
+  write_into_csv(csv_name, row) 
 
 
 

@@ -1,7 +1,7 @@
 #! /usr/bin/python3
 import pandas as pd
 import csv
-from calypso_imu.msg import buoy_imu
+from calypso_msgs.msg import buoy
 from datetime import datetime
 import time
 import rospy
@@ -34,4 +34,4 @@ if __name__ == '__main__':
 
   rospy.init_node('imu_msg_2_csv', anonymous=False)
   while not rospy.is_shutdown():
-    gypseas=rospy.Subscriber("/calypso/imu_raw", buoy_imu, listener)
+    gypseas=rospy.Subscriber("/calypso/imu_raw", buoy, listener)
