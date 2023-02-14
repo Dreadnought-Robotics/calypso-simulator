@@ -71,7 +71,6 @@ class rosetta :
       self.sim_imu=rospy.Subscriber("/calypso_sim/imu/data",Imu, self.talker1)
       self.rosetta_imu.publish(self.b)
       
-      self.rate.sleep()
       rospy.spin()
 
 if __name__=='__main__':
