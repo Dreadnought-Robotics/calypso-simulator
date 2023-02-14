@@ -107,6 +107,7 @@ class movements
         BLDC_2=LIFT;
         BLDC_3=LIFT;
         BLDC_4=LIFT;
+        PublishV();
     }
 
     void ZThrust(float x)
@@ -127,13 +128,14 @@ class movements
     void Pitch(float x)
     {
         float y=x*gain;
+        
         if(x>0)
         {
             reset_z();
             BLDC_1+=y;
             BLDC_2+=y;
-
         }
+
         else
         {
             reset_z();
