@@ -2,7 +2,7 @@ import rospy
 from std_msgs.msg import Float64
 from std_msgs.msg import Int64
 from calypso_msgs.msg import buoy
-from gazebo_msgs.msg import Imu
+from sensor_msgs.msg import Imu
 import pickle
 import math
 
@@ -23,7 +23,7 @@ class rosetta :
     self.yaw=0
     self.w=0
 
-    self.PBLDC_1 = rospy.Publisher('/rosetta/imu/data', buoy, queue_size=1000)
+    self.rosetta_imu = rospy.Publisher('/rosetta/imu/data', buoy, queue_size=1000)
     
     self.rate = rospy.Rate(10)
   
@@ -67,8 +67,8 @@ class rosetta :
       self.b.pitch=self.pitch
       self.b.yaw=self.yaw
 
-      self.imu=rospy.Subscriber("/calypso_sim/imu/data",Imu, self.talker1)
-      self.imu.publish(self.b)
+      self.sim_imu=rospy.Subscriber("/calypso_sim/imu/data",Imu, self.talker1)
+      self.rosetta_imu.publish(self.b)
       
       self.rate.sleep()
       rospy.spin()

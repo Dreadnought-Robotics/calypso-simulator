@@ -3,6 +3,7 @@ from std_msgs.msg import Float64
 from std_msgs.msg import Int64
 from calypso_msgs.msg import gypseas
 from calypso_msgs.msg import dolphins
+import math
 import pickle
 
 
@@ -57,9 +58,10 @@ class rosetta :
 
     if (x<1000 or x>2000):
       y = 0
-      v = 2 * π * r * y / 60
     # print(x,y)
-    return y
+    velocity=(2*math.pi*0.0381*y)/60
+    
+    return velocity
   
 
   def talker1(self,msg_gypseas):
