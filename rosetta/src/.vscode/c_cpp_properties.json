@@ -1,0 +1,26 @@
+{
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "${default}",
+        "limitSymbolsToIncludedHeaders": false
+      },
+      "includePath": [
+        "/home/dafodilrat/auv/devel/include/**",
+        "/opt/ros/noetic/include/**",
+        "/home/dafodilrat/catkin_ws/src/iot_cam/include/**",
+        "/home/dafodilrat/catkin_ws/src/ros_imu_bno055/include/**",
+        "/home/dafodilrat/auv/src/rosserial/rosserial_server/include/**",
+        "/home/dafodilrat/auv/src/rosserial/rosserial_test/include/**",
+        "/home/dafodilrat/catkin_ws/src/wireless_pid/include/**",
+        "/usr/include/**"
+      ],
+      "name": "ROS",
+      "intelliSenseMode": "gcc-x64",
+      "compilerPath": "/usr/bin/gcc",
+      "cStandard": "gnu11",
+      "cppStandard": "c++14"
+    }
+  ],
+  "version": 4
+}

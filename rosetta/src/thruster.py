@@ -41,7 +41,13 @@ class rosetta :
 
   def converter(self,x):
     # X=pwm Y=rpm
-    coeffs = pickle.load(open(r'pickle/coeffs.pickle', 'rb'))
+    coeffs = list()
+    coeffs.append(-1.6453836430727448e-05)
+    coeffs.append(0.07440821248059681)
+    coeffs.append(-100.45437634228745)
+    coeffs.append(38769.58439545923)
+    # [-1.6453836430727448e-05, 0.07440821248059681, -100.45437634228745, 38769.58439545923]
+    # print(coeffs)
     if (x>1470 and x<1530):
       y = 0
       v = 2 * π * r * y / 60
