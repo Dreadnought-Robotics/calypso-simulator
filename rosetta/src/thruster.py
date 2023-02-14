@@ -81,8 +81,8 @@ class rosetta :
   def start(self):
 
     while True:
-      self.gypseas=rospy.Subscriber("/calypso/gypseas", gypseas, self.talker1)
-      self.dolphins=rospy.Subscriber("/calypso/dolphins", dolphins, self.talker2)
+      self.gypseas=rospy.Subscriber("/rosetta/gypseas", gypseas, self.talker1)
+      self.dolphins=rospy.Subscriber("/rosetta/dolphins", dolphins, self.talker2)
       self.t=Float64()
       self.t.data=self.converter(self.t1)
       self.PBLDC_1.publish(self.t)

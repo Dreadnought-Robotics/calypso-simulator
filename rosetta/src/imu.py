@@ -66,6 +66,7 @@ class rosetta :
       self.b.roll=self.roll
       self.b.pitch=self.pitch
       self.b.yaw=self.yaw
+      self.b.w=self.w
 
       self.sim_imu=rospy.Subscriber("/calypso_sim/imu/data",Imu, self.talker1)
       self.rosetta_imu.publish(self.b)
