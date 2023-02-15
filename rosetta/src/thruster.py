@@ -7,9 +7,6 @@ import math
 import pickle
 
 
-r = 0.0762/2
-π = 3.14159265359
-
 class rosetta :
 
   def __init__(self):
@@ -51,10 +48,9 @@ class rosetta :
     # print(coeffs)
     if (x>1470 and x<1530):
       y = 0
-      v = 2 * π * r * y / 60
+
     else:
       y = x**3*coeffs[0] + x**2*coeffs[1] + x*coeffs[2] + coeffs[3] 
-      v = 2 * π * r * y / 60
 
     if (x<1000 or x>2000):
       y = 0
@@ -69,8 +65,7 @@ class rosetta :
     self.t1=msg_gypseas.t1
     self.t2=msg_gypseas.t2
     self.t3=msg_gypseas.t3
-    self.t4=msg_gypseas.t4
-    print(self.t1)
+    self.t4=msg_gypseas.t4  
 
   def talker2(self,msg_dolphins):
 
@@ -86,7 +81,6 @@ class rosetta :
       self.dolphins=rospy.Subscriber("/rosetta/dolphins", dolphins, self.talker2)
       self.t=Float64()
       self.t.data=self.converter(self.t1)
-      print(self.t1)
       self.PBLDC_1.publish(self.t)
       self.t.data=self.converter(self.t2)
       self.PBLDC_2.publish(self.t)
@@ -102,7 +96,8 @@ class rosetta :
       self.PBLDC_7.publish(self.t)
       self.t.data=self.converter(self.d4)
       self.PBLDC_8.publish(self.t)
-
+      
+      self.rate.sleep()
 
 if __name__=='__main__':
 
