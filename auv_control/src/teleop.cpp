@@ -117,10 +117,10 @@ class movements
         LIFT+=y;
         LIFT+=y;
         LIFT+=y;
-        BLDC_1=LIFT;
-        BLDC_2=LIFT;
-        BLDC_3=LIFT;
-        BLDC_4=LIFT;
+        BLDC_1=check(LIFT);
+        BLDC_2=check(LIFT);
+        BLDC_3=check(LIFT);
+        BLDC_4=check(LIFT);
 
         PublishV();
     }

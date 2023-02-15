@@ -55,7 +55,7 @@ class rosetta :
     if (x<1000 or x>2000):
       y = 0
     # print(x,y)
-    velocity=(2*math.pi*0.0381*y)/60
+    velocity=(2*math.pi*0.0381*1.5*y)/60
     
     return velocity
   
