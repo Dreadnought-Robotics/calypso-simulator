@@ -23,7 +23,7 @@ class rosetta :
     self.yaw=0
     self.w=0
 
-    self.rosetta_imu = rospy.Publisher('/rosetta/imu/data', buoy, queue_size=1000)
+    self.imu_pub = rospy.Publisher('/rosetta/imu/data', buoy, queue_size=1000)
     
     self.rate = rospy.Rate(10)
   
@@ -66,12 +66,11 @@ class rosetta :
       self.b.roll=self.roll
       self.b.pitch=self.pitch
       self.b.yaw=self.yaw
-      self.b.w=self.w
 
-      self.sim_imu=rospy.Subscriber("/calypso_sim/imu/data",Imu, self.talker1)
-      self.rosetta_imu.publish(self.b)
+      self.imu=rospy.Subscriber("/calypso_sim/imu/data",Imu, self.talker1)
+      self.imu_pub.publish(self.b)
       
-      rospy.spin()
+      self.rate.sleep()
 
 if __name__=='__main__':
 

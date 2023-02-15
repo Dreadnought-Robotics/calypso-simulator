@@ -70,6 +70,7 @@ class rosetta :
     self.t2=msg_gypseas.t2
     self.t3=msg_gypseas.t3
     self.t4=msg_gypseas.t4
+    print(self.t1)
 
   def talker2(self,msg_dolphins):
 
@@ -85,6 +86,7 @@ class rosetta :
       self.dolphins=rospy.Subscriber("/rosetta/dolphins", dolphins, self.talker2)
       self.t=Float64()
       self.t.data=self.converter(self.t1)
+      print(self.t1)
       self.PBLDC_1.publish(self.t)
       self.t.data=self.converter(self.t2)
       self.PBLDC_2.publish(self.t)
@@ -101,7 +103,6 @@ class rosetta :
       self.t.data=self.converter(self.d4)
       self.PBLDC_8.publish(self.t)
 
-      self.rate.sleep()
 
 if __name__=='__main__':
 
