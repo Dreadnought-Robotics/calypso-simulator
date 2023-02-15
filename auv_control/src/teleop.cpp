@@ -275,14 +275,14 @@ int main(int argc, char **argv)
 
     std::cout<<msg;
 
-    PBLDC_1 = n.advertise<std_msgs::Float64>("/prop_1_to_thruster_1_joint_controller/command", 1000);
-    PBLDC_2 = n.advertise<std_msgs::Float64>("/prop_2_to_thruster_2_joint_controller/command", 1000);
-    PBLDC_3 = n.advertise<std_msgs::Float64>("/prop_3_to_thruster_3_joint_controller/command", 1000);
-    PBLDC_4 = n.advertise<std_msgs::Float64>("/prop_4_to_thruster_4_joint_controller/command", 1000);
-    PBLDC_5 = n.advertise<std_msgs::Float64>("/prop_5_to_thruster_5_joint_controller/command", 1000);
-    PBLDC_6 = n.advertise<std_msgs::Float64>("/prop_6_to_thruster_6_joint_controller/command", 1000);
-    PBLDC_7 = n.advertise<std_msgs::Float64>("/prop_7_to_thruster_7_joint_controller/command", 1000);
-    PBLDC_8 = n.advertise<std_msgs::Float64>("/prop_8_to_thruster_8_joint_controller/command", 1000);
+    PBLDC_1 = n.advertise<std_msgs::Float64>("/thruster_1_controller/command", 1000);
+    PBLDC_2 = n.advertise<std_msgs::Float64>("/thruster_2_controller/command", 1000);
+    PBLDC_3 = n.advertise<std_msgs::Float64>("/thruster_3_controller/command", 1000);
+    PBLDC_4 = n.advertise<std_msgs::Float64>("/thruster_4_controller/command", 1000);
+    PBLDC_5 = n.advertise<std_msgs::Float64>("/thruster_5_controller/command", 1000);
+    PBLDC_6 = n.advertise<std_msgs::Float64>("/thruster_6_controller/command", 1000);
+    PBLDC_7 = n.advertise<std_msgs::Float64>("/thruster_7_controller/command", 1000);
+    PBLDC_8 = n.advertise<std_msgs::Float64>("/thruster_8_controller/command", 1000);
     movements auv;
 
     while (true)

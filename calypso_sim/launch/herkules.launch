@@ -56,14 +56,14 @@
 
   <rosparam command="load" file="$(find calypso_sim)/config/controllers.yaml"/>
   
-  <node name="Controller_Spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" args="
+    <node name="Controller_Spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" args="
     joint_state_controller 
-    prop_1_to_thruster_1_joint_controller 
-    prop_2_to_thruster_2_joint_controller 
-    prop_3_to_thruster_3_joint_controller 
-    prop_4_to_thruster_4_joint_controller
-    prop_5_to_thruster_5_joint_controller
-    prop_6_to_thruster_6_joint_controller
-    prop_7_to_thruster_7_joint_controller
-    prop_8_to_thruster_8_joint_controller"/>
+    thruster_1_controller 
+    thruster_2_controller 
+    thruster_3_controller 
+    thruster_4_controller
+    thruster_5_controller
+    thruster_6_controller
+    thruster_7_controller
+    thruster_8_controller"/>
 </launch>

@@ -24,14 +24,14 @@ class rosetta :
     self.d3=0
     self.d4=0
 
-    self.PBLDC_1 = rospy.Publisher('/prop_1_to_thruster_1_joint_controller/command', Float64, queue_size=1000)
-    self.PBLDC_2 = rospy.Publisher('/prop_2_to_thruster_2_joint_controller/command', Float64, queue_size=1000)
-    self.PBLDC_3 = rospy.Publisher('/prop_3_to_thruster_3_joint_controller/command', Float64, queue_size=1000)
-    self.PBLDC_4 = rospy.Publisher('/prop_4_to_thruster_4_joint_controller/command', Float64, queue_size=1000)
-    self.PBLDC_5 = rospy.Publisher('/prop_5_to_thruster_5_joint_controller/command', Float64, queue_size=1000)
-    self.PBLDC_6 = rospy.Publisher('/prop_6_to_thruster_6_joint_controller/command', Float64, queue_size=1000)
-    self.PBLDC_7 = rospy.Publisher('/prop_7_to_thruster_7_joint_controller/command', Float64, queue_size=1000)
-    self.PBLDC_8 = rospy.Publisher('/prop_8_to_thruster_8_joint_controller/command', Float64, queue_size=1000)
+    self.PBLDC_1 = rospy.Publisher('/thruster_1_controller/command', Float64, queue_size=1000)
+    self.PBLDC_2 = rospy.Publisher('/thruster_2_controller/command', Float64, queue_size=1000)
+    self.PBLDC_3 = rospy.Publisher('/thruster_3_controller/command', Float64, queue_size=1000)
+    self.PBLDC_4 = rospy.Publisher('/thruster_4_controller/command', Float64, queue_size=1000)
+    self.PBLDC_5 = rospy.Publisher('/thruster_5_controller/command', Float64, queue_size=1000)
+    self.PBLDC_6 = rospy.Publisher('/thruster_6_controller/command', Float64, queue_size=1000)
+    self.PBLDC_7 = rospy.Publisher('/thruster_7_controller/command', Float64, queue_size=1000)
+    self.PBLDC_8 = rospy.Publisher('/thruster_8_controller/command', Float64, queue_size=1000)
     
     self.rate = rospy.Rate(10)
 
