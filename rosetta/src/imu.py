@@ -46,7 +46,6 @@ class rosetta :
 
     return X, Y, Z
     
-
   def talker1(self,imu):
 
     self.x=imu.orientation.x
@@ -63,6 +62,7 @@ class rosetta :
       self.b.x=self.x
       self.b.y=self.y
       self.b.z=self.z
+      self.b.w=self.w
       self.b.roll=self.roll
       self.b.pitch=self.pitch
       self.b.yaw=self.yaw
