@@ -9,10 +9,10 @@ if __name__ == '__main__':
   gpub=rospy.Publisher("/rosetta/gypseas",gypseas,queue_size=1000)
   dpub=rospy.Publisher("/rosetta/dolphins",dolphins,queue_size=1000)
   g=gypseas()
-  g.t1=1600
-  g.t2=1600
-  g.t3=1600
-  g.t4=1600
+  g.t1=1700
+  g.t2=1700
+  g.t3=1700
+  g.t4=1700
   d=dolphins()
   d.d1=1500
   d.d2=1500
