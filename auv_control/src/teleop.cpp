@@ -36,7 +36,7 @@ float BLDC_6=0.0;
 float BLDC_7=0.0;
 float BLDC_8=0.0;
 float MIN_THRUST=0.0;
-float MAX_THRUST=29.93;
+float MAX_THRUST=3751;
 float LIFT=0;
 float gain=2;
 
