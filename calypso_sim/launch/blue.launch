@@ -45,5 +45,7 @@
     thruster_6_controller
     thruster_7_controller
     thruster_8_controller"/>
+    
+    <include file="$(find calypso_sim)/launch/rosetta.launch"/>
 
 </launch>

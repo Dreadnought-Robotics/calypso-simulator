@@ -1,0 +1,5 @@
+<?xml version="1.0" ?>
+<launch>
+  <node name="calypso_pid" pkg="calypso_pid" type="pid.py" output="screen"/>a
+</launch>
+

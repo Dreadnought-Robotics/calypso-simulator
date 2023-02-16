@@ -2,6 +2,5 @@
 <launch>
   <node name="rosetta_thruster" pkg="rosetta" type="thruster.py" output="screen"/>a
   <node name="rosetta_imu" pkg="rosetta" type="imu.py" output="screen"/>
-
 </launch>
 
