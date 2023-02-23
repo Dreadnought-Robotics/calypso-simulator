@@ -27,9 +27,9 @@
 
     <!-- <xacro:property name="x" default="0"/>
     <xacro:property name="y" default="0"/> -->
-    <xacro:property name="x" default="-0.35"/>
-    <xacro:property name="y" default="0.35"/>
-    <xacro:property name="z" default="0"/>
+    <xacro:property name="x" default="-0.26"/>
+    <xacro:property name="y" default="0.43"/>
+    <xacro:property name="z" default="-0.1"/>
     <xacro:property name="r" default="1.57"/>
     <xacro:property name="p" default="0"/>
     <xacro:property name="Y" default="0"/>
@@ -47,7 +47,7 @@
     <link name="base_link">
         <visual>
           <geometry>
-              <mesh filename="package://calypso_sim/meshes/auv-body/auv.STL" scale="0.001 0.001 0.001"/>
+              <mesh filename="package://calypso_sim/meshes/auv-body/AUV.STL" scale="0.001 0.001 0.001"/>
           </geometry>
           <origin xyz="${x} ${y} ${z}" rpy="${r} ${p} ${Y}" />
           <material name="yellow"/>
@@ -61,19 +61,8 @@
     
       <inertial>
         <mass value="37"/>
-        <inertia ixx="466338.03533197" ixy="0.00022747" ixz="-0.00184206" iyy="846140.53520644" iyz="-13851.49143136" izz="547835.76597596"/>
+        <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
       </inertial>
-
-      <fluid>
-        <density>1</density>
-        <origin xyz= "0 0 0"/>
-        <buoyancy>
-            <compensation>1.01</compensation>    
-        </buoyancy>
-        <hydrodynamics>
-            <drag xyz="60 100 100" rpy="20 50 50" type="linear"/>
-        </hydrodynamics>   
-      </fluid> 
 
     </link>
 
@@ -93,36 +82,35 @@
 -->
     <!-- ${x}-0.32 ${y}-0.06 ${z}+0.1 -->
 
-    <xacro:thruster_CCW id="1" parent="base_link" xyz="0.26 -0.062 0.1" rpy="0 0 0" axis="0 0 -1">
+    <xacro:thruster_CCW id="1" parent="base_link" xyz="0.185 -0.11 0.1" rpy="0 0 0" axis="0 0 -1">
     </xacro:thruster_CCW>
 
-    <xacro:thruster_CW id="2" parent="base_link" xyz="${x-x-0.32} ${y-y-0.06} ${z+0.1}" rpy="0 0 0" axis="0 0 1">
+    <xacro:thruster_CW id="2" parent="base_link" xyz="-0.2 -0.11 0.1" rpy="0 0 0" axis="0 0 1">
     </xacro:thruster_CW>
     
-    <xacro:thruster_CW id="4" parent="base_link" xyz="0.26 0.12 0.1" rpy="0 0 0" axis="0 0 1">
+    <xacro:thruster_CW id="4" parent="base_link" xyz="0.185 0.13 0.1" rpy="0 0 0" axis="0 0 1">
     </xacro:thruster_CW>
 
-    <xacro:thruster_CCW id="3" parent="base_link" xyz="-0.32 0.12 0.1" rpy="0 0 0" axis="0 0 -1" >
+    <xacro:thruster_CCW id="3" parent="base_link" xyz="-0.2 0.13 0.1" rpy="0 0 0" axis="0 0 -1" >
     </xacro:thruster_CCW>
 
-    <xacro:thruster_CCW id="5" parent="base_link" xyz="0.22 -0.22 0.06" rpy="0 1.57 0.785" axis="0 0 -1">
+    <xacro:thruster_CCW id="5" parent="base_link" xyz="0.15 -0.25 0.06" rpy="0 1.57 0.785398" axis="0 0 -1">
     </xacro:thruster_CCW>
 
-    <xacro:thruster_CW id="6" parent="base_link" xyz="-0.23 -0.23 0.06" rpy="0 1.57 2.182" axis="0 0 1">
+    <xacro:thruster_CW id="6" parent="base_link" xyz="-0.15 -0.25 0.06" rpy="0 1.57 2.35619" axis="0 0 1">
     </xacro:thruster_CW>
 
-    <xacro:thruster_CCW id="7" parent="base_link" xyz="-0.26 0.28 0.06" rpy="0 1.57 3.92" axis="0 0 -1">
+    <xacro:thruster_CCW id="7" parent="base_link" xyz="-0.15 0.25 0.06" rpy="0 1.57 3.92" axis="0 0 -1">
     </xacro:thruster_CCW>
 
-    <xacro:thruster_CW id="8" parent="base_link" xyz="0.22 0.28 0.06" rpy="0 1.57 -0.785" axis="0 0 1">
+    <xacro:thruster_CW id="8" parent="base_link" xyz="0.15 0.25 0.06" rpy="0 1.57 -0.785398" axis="0 0 1">
     </xacro:thruster_CW>
 
 
-
-    <xacro:camera id="1" parent="base_link" xyz="-0.02 -0.2 0.19" rpy="0 0 -1.57">
+    <xacro:camera id="1" parent="base_link" xyz="-0.005 -0.25 0.13" rpy="0 0 -1.57">
     </xacro:camera>
 
-    <xacro:imu id="1" parent="base_link" xyz="-0.02 0.1 0.06" rpy="0 0 -1.57">
+    <xacro:imu id="1" parent="base_link" xyz="-0.02 0.1 0.12" rpy="0 0 -1.57">
     </xacro:imu>
 
     <gazebo>
@@ -131,14 +119,21 @@
           <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
       </plugin>
     </gazebo>
-<!-- 
-    <gazebo>
-      <plugin name="BuoyancyPlugin" filename="libBuoyancyPlugin.so">
-        <fluid_density>1000</fluid_density>
-        <link name="base_link">
-          <volume>0.00964522875</volume>
-        </link>
-      </plugin>
-    </gazebo> -->
+
+    <plugin name="freebuoyancy_gazebo" filename="libfreebuoyancy_gazebo.so">
+      <descriptionParam>robot_description</descriptionParam>
+      <fluidTopic>current</fluidTopic>
+      <alwaysOn>true</alwaysOn>
+      <surface>0 0 0</surface>
+      <updateRate>.001</updateRate>
+
+      <link name='base_link'>
+        <buoyancy>
+          <compensation>1.01</compensation>
+          <origin xyz= "0 0 0"/>
+        </buoyancy>
+      </link>
+    </plugin>
+
 
 </robot>

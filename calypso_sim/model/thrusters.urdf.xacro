@@ -112,6 +112,19 @@
       <allow_auto_disable>0</allow_auto_disable>
     </gazebo>
 
+    <!-- <gazebo>
+    
+      <plugin name="freefloating_gazebo_control" filename="libfreefloating_gazebo_control.so">
+        <switchService>switch</switchService>
+        <updateRate>100</updateRate>
+        <link>base_link</link>
+        
+        <thruster>
+            <map>${xyz} ${rpy}</map>
+            <effort>30</effort>
+        </thruster>
+      </plugin>
+    </gazebo> -->
 
      <gazebo reference="prop_${id}">
         <material>Gazebo/Red</material>
@@ -226,10 +239,22 @@
       <static>0</static>
       <allow_auto_disable>0</allow_auto_disable>
     </gazebo>
-    
 
-     <gazebo reference="prop_${id}">
-        <material>Gazebo/Green</material>
+  <!-- <gazebo>
+      <plugin name="freefloating_gazebo_control" filename="libfreefloating_gazebo_control.so">
+        <switchService>switch</switchService>
+        <updateRate>100</updateRate>
+        <link>base_link</link>
+        
+        <thruster>
+            <map>-1 0 0 0 0 ${-body_width/2}</map>
+            <effort>30</effort>
+        </thruster>
+      </plugin>
+  </gazebo> -->
+
+    <gazebo reference="prop_${id}">
+      <material>Gazebo/Green</material>
     </gazebo>
 
   </xacro:macro>
