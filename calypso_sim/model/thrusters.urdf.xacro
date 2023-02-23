@@ -9,14 +9,14 @@
        <visual>
         <material name="red"/>
         <geometry>
-           <mesh filename="${thrusterCCW_path}T200_Thruster.dae" scale="1.5 1.5 1.5"/>
+           <mesh filename="${thrusterCCW_path}T200_Thruster.dae" scale="1 1 1"/>
            <!--<box size="0.1 0.1 0.1"/>-->
         </geometry>
       </visual>
 
       <collision>
         <geometry>
-          <mesh filename="${thrusterCCW_path}T200_Thruster.dae" scale="1.5 1.5 1.5"/>
+          <mesh filename="${thrusterCCW_path}T200_Thruster.dae" scale="1 1 1"/>
         </geometry>
       </collision>
 
@@ -41,13 +41,13 @@
 
       <visual>
         <geometry>
-          <mesh filename="${thrusterCCW_path}T200_Prop_CCW.dae" scale="1.5 1.5 1.5"/>
+          <mesh filename="${thrusterCCW_path}T200_Prop_CCW.dae" scale="1 1 1"/>
         </geometry>
       </visual>
 
       <collision>
         <geometry>
-          <mesh filename="${thrusterCCW_path}T200_Prop_CCW.dae" scale="1.5 1.5 1.5"/>
+          <mesh filename="${thrusterCCW_path}T200_Prop_CCW.dae" scale="1 1 1"/>
         </geometry>
       </collision>
 
@@ -123,7 +123,7 @@
     <link name="thruster_${id}_link">
        <visual>
         <geometry>
-           <mesh filename="${thrusterCW_path}T200_Thruster.dae" scale="1.5 1.5 1.5"/>
+           <mesh filename="${thrusterCW_path}T200_Thruster.dae" scale="1 1 1"/>
            <!--<box size="0.1 0.1 0.1"/>-->
         </geometry>
         <material name="red"/>
@@ -131,7 +131,7 @@
 
       <collision>
         <geometry>
-          <mesh filename="${thrusterCW_path}T200_Thruster.dae" scale="1.5 1.5 1.5"/>
+          <mesh filename="${thrusterCW_path}T200_Thruster.dae" scale="1 1 1"/>
         </geometry>
       </collision>
 
@@ -156,14 +156,14 @@
       
       <visual>
         <geometry>
-          <mesh filename="${thrusterCW_path}T200_Prop_CW.dae" scale="1.5 1.5 1.5"/>
+          <mesh filename="${thrusterCW_path}T200_Prop_CW.dae" scale="1 1 1"/>
         </geometry>
         <material name="green"/>
       </visual>
 
       <collision>
         <geometry>
-          <mesh filename="${thrusterCW_path}T200_Prop_CW.dae" scale="1.5 1.5 1.5"/>
+          <mesh filename="${thrusterCW_path}T200_Prop_CW.dae" scale="1 1 1"/>
         </geometry>
       </collision>
 

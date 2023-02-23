@@ -60,9 +60,20 @@
       </collision>
     
       <inertial>
-        <mass value="160"/>
+        <mass value="37"/>
         <inertia ixx="466338.03533197" ixy="0.00022747" ixz="-0.00184206" iyy="846140.53520644" iyz="-13851.49143136" izz="547835.76597596"/>
       </inertial>
+
+      <fluid>
+        <density>1</density>
+        <origin xyz= "0 0 0"/>
+        <buoyancy>
+            <compensation>1.01</compensation>    
+        </buoyancy>
+        <hydrodynamics>
+            <drag xyz="60 100 100" rpy="20 50 50" type="linear"/>
+        </hydrodynamics>   
+      </fluid> 
 
     </link>
 
@@ -120,7 +131,7 @@
           <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
       </plugin>
     </gazebo>
-
+<!-- 
     <gazebo>
       <plugin name="BuoyancyPlugin" filename="libBuoyancyPlugin.so">
         <fluid_density>1000</fluid_density>
@@ -128,6 +139,6 @@
           <volume>0.00964522875</volume>
         </link>
       </plugin>
-    </gazebo>
+    </gazebo> -->
 
 </robot>
