@@ -1,0 +1,133 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="auv">
+
+    <xacro:include filename="$(find calypso_sim)/model/camera.urdf.xacro"/>
+    <xacro:include filename="$(find calypso_sim)/model/imu.urdf.xacro"/>
+    <xacro:include filename="$(find calypso_sim)/model/thrusters.urdf.xacro"/>
+
+    <material name="red">
+        <color rgba="1 0 0 1"/>
+    </material>
+
+    <material name="blue">
+        <color rgba="0 0 0.8 1"/>
+    </material>
+
+    <material name="white">
+        <color rgba="1 1 1 1"/>
+    </material>
+
+     <material name="yellow">
+        <color rgba="1 1 0 1"/>
+    </material>
+
+      <material name="green">
+        <color rgba="0 1 0 1"/>
+    </material>
+
+    <!-- <xacro:property name="x" default="0"/>
+    <xacro:property name="y" default="0"/> -->
+    <xacro:property name="x" default="-0.35"/>
+    <xacro:property name="y" default="0.35"/>
+    <xacro:property name="z" default="0"/>
+    <xacro:property name="r" default="1.57"/>
+    <xacro:property name="p" default="0"/>
+    <xacro:property name="Y" default="0"/>
+
+
+    <!-- <link name="dummy">
+    </link>
+
+    <joint name="base_link_to_dummy" type="fixed">
+        <parent link="dummy"/>
+        <child link="base_link"/>
+        <origin xyz="${x} ${y} ${z}" rpy="${r} ${p} ${Y}"/>
+    </joint> -->
+
+    <link name="base_link">
+        <visual>
+          <geometry>
+              <mesh filename="package://calypso_sim/meshes/auv-body/auv.STL" scale="0.001 0.001 0.001"/>
+          </geometry>
+          <origin xyz="${x} ${y} ${z}" rpy="${r} ${p} ${Y}" />
+          <material name="yellow"/>
+      </visual>
+
+      <collision>
+        <geometry>
+          <mesh filename="package://calypso_sim/meshes/auv-body/auv.STL" scale="0.001 0.001 0.001"/>
+        </geometry>
+      </collision>
+    
+      <inertial>
+        <mass value="160"/>
+        <inertia ixx="466338.03533197" ixy="0.00022747" ixz="-0.00184206" iyy="846140.53520644" iyz="-13851.49143136" izz="547835.76597596"/>
+      </inertial>
+
+    </link>
+
+    <gazebo reference="base_link">
+        <material>Gazebo/Yellow</material>
+    </gazebo>
+
+    <!-- 
+// 2:right upper 1->2 
+// 1:left upper  2->1
+// 4:left lower  3->4
+// 3:right lower 4->3 
+// 6->7 
+// 7->8
+// 8->6  
+
+-->
+    <!-- ${x}-0.32 ${y}-0.06 ${z}+0.1 -->
+
+    <xacro:thruster_CCW id="1" parent="base_link" xyz="0.26 -0.062 0.1" rpy="0 0 0" axis="0 0 -1">
+    </xacro:thruster_CCW>
+
+    <xacro:thruster_CW id="2" parent="base_link" xyz="${x-x-0.32} ${y-y-0.06} ${z+0.1}" rpy="0 0 0" axis="0 0 1">
+    </xacro:thruster_CW>
+    
+    <xacro:thruster_CW id="4" parent="base_link" xyz="0.26 0.12 0.1" rpy="0 0 0" axis="0 0 1">
+    </xacro:thruster_CW>
+
+    <xacro:thruster_CCW id="3" parent="base_link" xyz="-0.32 0.12 0.1" rpy="0 0 0" axis="0 0 -1" >
+    </xacro:thruster_CCW>
+
+    <xacro:thruster_CCW id="5" parent="base_link" xyz="0.22 -0.22 0.06" rpy="0 1.57 0.785" axis="0 0 -1">
+    </xacro:thruster_CCW>
+
+    <xacro:thruster_CW id="6" parent="base_link" xyz="-0.23 -0.23 0.06" rpy="0 1.57 2.182" axis="0 0 1">
+    </xacro:thruster_CW>
+
+    <xacro:thruster_CCW id="7" parent="base_link" xyz="-0.26 0.28 0.06" rpy="0 1.57 3.92" axis="0 0 -1">
+    </xacro:thruster_CCW>
+
+    <xacro:thruster_CW id="8" parent="base_link" xyz="0.22 0.28 0.06" rpy="0 1.57 -0.785" axis="0 0 1">
+    </xacro:thruster_CW>
+
+
+
+    <xacro:camera id="1" parent="base_link" xyz="-0.02 -0.2 0.19" rpy="0 0 -1.57">
+    </xacro:camera>
+
+    <xacro:imu id="1" parent="base_link" xyz="-0.02 0.1 0.06" rpy="0 0 -1.57">
+    </xacro:imu>
+
+    <gazebo>
+      <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+          <!-- <robotNameSpace>/Kwad</robotNameSpace> -->
+          <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
+      </plugin>
+    </gazebo>
+
+    <gazebo>
+      <plugin name="BuoyancyPlugin" filename="libBuoyancyPlugin.so">
+        <fluid_density>1000</fluid_density>
+        <link name="base_link">
+          <volume>0.00964522875</volume>
+        </link>
+      </plugin>
+    </gazebo>
+
+</robot>
