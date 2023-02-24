@@ -11,7 +11,151 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   rospy
   std_msgs
+  geometry_msgs
+  message_generation
+  visualization_msgs
 )
+
+find_package(Boost REQUIRED COMPONENTS system)
+find_package(Eigen3 REQUIRED)
+find_package(Protobuf REQUIRED)
+
+set(CALYPSO_GAZEBO_PLUGINS_LIST "")
+
+file(MAKE_DIRECTORY ${PROJECT_BINARY_DIR}/msgs)
+
+set(PROTOBUF_IMPORT_DIRS "")
+foreach(ITR ${GAZEBO_INCLUDE_DIRS})
+  if(ITR MATCHES ".*gazebo-[0-9.]+$")
+    set(PROTOBUF_IMPORT_DIRS "${ITR}/gazebo/msgs/proto")
+  endif()
+endforeach()
+
+set(GAZEBO_MSG_INCLUDE_DIRS)
+foreach(ITR ${GAZEBO_INCLUDE_DIRS})
+  if(ITR MATCHES ".*gazebo-[0-9.]+$")
+    set(GAZEBO_MSG_INCLUDE_DIRS "${ITR}/gazebo/msgs")
+  endif()
+endforeach()
+
+message(STATUS "GAZEBO_MSG_INCLUDE_DIRS = " ${GAZEBO_MSG_INCLUDE_DIRS})
+
+message(STATUS "PROTOBUF_IMPORT_DIRS = " ${PROTOBUF_IMPORT_DIRS})
+
+add_message_files(
+  FILES
+  FloatStamped.msg
+  UnderwaterObjectModel.msg
+  ThrusterConversionFcn.msg
+)
+
+add_service_files(
+  FILES
+  SetThrusterEfficiency.srv
+  SetThrusterState.srv
+  GetThrusterEfficiency.srv
+  GetThrusterState.srv
+  GetThrusterConversionFcn.srv
+)
+
+catkin_package(
+  INCLUDE_DIRS 
+    include 
+    ${CMAKE_CURRENT_BINARY_DIR} # for generated messages
+    ${GAZEBO_MSG_INCLUDE_DIRS} 
+  LIBRARIES
+    thruster_ros_plugin
+  CATKIN_DEPENDS
+    std_msgs
+    geometry_msgs
+    message_runtime
+)
+
+include_directories(
+  ${PROJECT_SOURCE_DIR}/include
+  ${catkin_INCLUDE_DIRS}
+  ${GAZEBO_INCLUDE_DIRS}
+  ${GAZEBO_MSG_INCLUDE_DIRS}
+  ${CMAKE_CURRENT_BINARY_DIR} # for generated messages
+  ${Boost_INCLUDE_DIR}
+  ${catkin_INCLUDE_DIRS}
+  ${GAZEBO_MSG_INCLUDE_DIRS}
+  ${EIGEN3_INCLUDE_DIRS}
+)
+
+link_directories(
+  ${GAZEBO_LIBRARY_DIRS}
+  ${EIGEN3_LIBRARY_DIRS}
+)
+
+#####################################################################
+################## BUILD MAKE FILES #################################
+#####################################################################
+
+add_library(calypso_thruster_ros_plugin src/ThrusterROSPlugin.cc)
+target_link_libraries(calypso_thruster_ros_plugin ${catkin_LIBRARIES})
+add_dependencies(calypso_thruster_ros_plugin ${catkin_EXPORTED_TARGETS})
+list(APPEND CALYPSO_GAZEBO_ROS_PLUGINS_LIST calyspo_thruster_ros_plugin)
+
+protobuf_generate_cpp(PROTO_SRCS PROTO_HDRS ${msgs})
+add_library(calypso_gazebo_plugins_msgs SHARED ${PROTO_SRCS})
+target_link_libraries(calypso_gazebo_plugins_msgs ${PROTOBUF_LIBRARY})
+list(APPEND CALYPSO_GAZEBO_PLUGINS_LIST calypso_gazebo_plugins_msgs)
+
+add_library(calypso_dynamics
+    SHARED
+    src/Dynamics.cc
+)
+list(APPEND CALYPSO_GAZEBO_PLUGINS_LIST calyspos_dynamics)
+
+add_library(calypso_thruster_plugin
+    src/ThrusterConversionFcn.cc
+    src/ThrusterPlugin.cc
+)
+target_link_libraries(calypso_thruster_plugin
+    calypso_dynamics
+    calypso_gazebo_plugins_msgs
+    ${catkin_LIBRARIES}
+    ${Boost_LIBRARIES})
+add_dependencies(calypso_thruster_plugin
+    calypso_gazebo_plugins_msgs
+    ${catkin_EXPORTED_TARGETS})
+list(APPEND CALYPSO_GAZEBO_PLUGINS_LIST calypso_thruster_plugin)
+
+#########################################################################
+##################### INSTALL TARGETS ###################################
+#########################################################################
+
+
+install(TARGETS ${CALYPSO_GAZEBO_ROS_PLUGINS_LIST}
+  DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+  LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+  RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
+
+install(TARGETS ${UUV_GAZEBO_PLUGINS_LIST}
+  ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+  LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+  RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
+
+install(DIRECTORY include/${PROJECT_NAME}/
+  DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
+  FILES_MATCHING PATTERN "*.hh"
+  PATTERN "*~" EXCLUDE
+)
+
+install(DIRECTORY include/
+   DESTINATION ${CATKIN_GLOBAL_INCLUDE_DESTINATION}
+   FILES_MATCHING PATTERN ".hh"
+)
+
+install(DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/
+  DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
+  FILES_MATCHING PATTERN "*.pb.*"
+  PATTERN "*~" EXCLUDE
+)
+
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)

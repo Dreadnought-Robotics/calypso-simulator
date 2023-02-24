@@ -33,7 +33,7 @@ ThrusterROSPlugin::~ThrusterROSPlugin()
 
 /////////////////////////////////////////////////
 void ThrusterROSPlugin::SetThrustReference(
-    const uuv_gazebo_ros_plugins_msgs::FloatStamped::ConstPtr &_msg)
+    const calypso_thruster::FloatStamped::ConstPtr &_msg)
 {
   if (std::isnan(_msg->data))
   {
@@ -131,12 +131,12 @@ void ThrusterROSPlugin::Load(gazebo::physics::ModelPtr _parent,
       &ThrusterROSPlugin::GetThrusterConversionFcn, this);
 
   this->subThrustReference = this->rosNode->subscribe<
-    uuv_gazebo_ros_plugins_msgs::FloatStamped
+    calypso_thruster::FloatStamped
     >(this->commandSubscriber->GetTopic(), 10,
       boost::bind(&ThrusterROSPlugin::SetThrustReference, this, _1));
 
   this->pubThrust = this->rosNode->advertise<
-    uuv_gazebo_ros_plugins_msgs::FloatStamped
+    calypso_thruster::FloatStamped
     >(this->thrustTopicPublisher->GetTopic(), 10);
 
   this->pubThrustWrench =
@@ -174,7 +174,7 @@ void ThrusterROSPlugin::RosPublishStates()
     this->lastRosPublishTime = this->thrustForceStamp;
 
     // Publish the thrust force magnitude
-    uuv_gazebo_ros_plugins_msgs::FloatStamped thrustMsg;
+    calypso_thruster::FloatStamped thrustMsg;
     thrustMsg.header.stamp = ros::Time().now();
     thrustMsg.header.frame_id = this->thrusterLink->GetName();
     thrustMsg.data = this->thrustForce;
@@ -209,8 +209,8 @@ void ThrusterROSPlugin::RosPublishStates()
 
 /////////////////////////////////////////////////
 bool ThrusterROSPlugin::SetThrustForceEfficiency(
-  uuv_gazebo_ros_plugins_msgs::SetThrusterEfficiency::Request& _req,
-  uuv_gazebo_ros_plugins_msgs::SetThrusterEfficiency::Response& _res)
+  calypso_thruster::SetThrusterEfficiency::Request& _req,
+  calypso_thruster::SetThrusterEfficiency::Response& _res)
 {
   if (_req.efficiency < 0.0 || _req.efficiency > 1.0)
   {
@@ -229,8 +229,8 @@ bool ThrusterROSPlugin::SetThrustForceEfficiency(
 
 /////////////////////////////////////////////////
 bool ThrusterROSPlugin::GetThrustForceEfficiency(
-  uuv_gazebo_ros_plugins_msgs::GetThrusterEfficiency::Request& _req,
-  uuv_gazebo_ros_plugins_msgs::GetThrusterEfficiency::Response& _res)
+  calypso_thruster::GetThrusterEfficiency::Request& _req,
+  calypso_thruster::GetThrusterEfficiency::Response& _res)
 {
   _res.efficiency = this->thrustEfficiency;
   return true;
@@ -238,8 +238,8 @@ bool ThrusterROSPlugin::GetThrustForceEfficiency(
 
 /////////////////////////////////////////////////
 bool ThrusterROSPlugin::SetDynamicStateEfficiency(
-  uuv_gazebo_ros_plugins_msgs::SetThrusterEfficiency::Request& _req,
-  uuv_gazebo_ros_plugins_msgs::SetThrusterEfficiency::Response& _res)
+  calypso_thruster::SetThrusterEfficiency::Request& _req,
+  calypso_thruster::SetThrusterEfficiency::Response& _res)
 {
   if (_req.efficiency < 0.0 || _req.efficiency > 1.0)
   {
@@ -258,8 +258,8 @@ bool ThrusterROSPlugin::SetDynamicStateEfficiency(
 
 /////////////////////////////////////////////////
 bool ThrusterROSPlugin::GetDynamicStateEfficiency(
-  uuv_gazebo_ros_plugins_msgs::GetThrusterEfficiency::Request& _req,
-  uuv_gazebo_ros_plugins_msgs::GetThrusterEfficiency::Response& _res)
+  calypso_thruster::GetThrusterEfficiency::Request& _req,
+  calypso_thruster::GetThrusterEfficiency::Response& _res)
 {
   _res.efficiency = this->propellerEfficiency;
   return true;
@@ -267,8 +267,8 @@ bool ThrusterROSPlugin::GetDynamicStateEfficiency(
 
 /////////////////////////////////////////////////
 bool ThrusterROSPlugin::SetThrusterState(
-  uuv_gazebo_ros_plugins_msgs::SetThrusterState::Request& _req,
-  uuv_gazebo_ros_plugins_msgs::SetThrusterState::Response& _res)
+  calypso_thruster::SetThrusterState::Request& _req,
+  calypso_thruster::SetThrusterState::Response& _res)
 {
   this->isOn = _req.on;
   gzmsg << "Turning thruster " << this->thrusterLink->GetName() << " " <<
@@ -279,8 +279,8 @@ bool ThrusterROSPlugin::SetThrusterState(
 
 /////////////////////////////////////////////////
 bool ThrusterROSPlugin::GetThrusterState(
-  uuv_gazebo_ros_plugins_msgs::GetThrusterState::Request& _req,
-  uuv_gazebo_ros_plugins_msgs::GetThrusterState::Response& _res)
+  calypso_thruster::GetThrusterState::Request& _req,
+  calypso_thruster::GetThrusterState::Response& _res)
 {
   _res.is_on = this->isOn;
   return true;
@@ -288,8 +288,8 @@ bool ThrusterROSPlugin::GetThrusterState(
 
 /////////////////////////////////////////////////
 bool ThrusterROSPlugin::GetThrusterConversionFcn(
-  uuv_gazebo_ros_plugins_msgs::GetThrusterConversionFcn::Request& _req,
-  uuv_gazebo_ros_plugins_msgs::GetThrusterConversionFcn::Response& _res)
+  calypso_thruster::GetThrusterConversionFcn::Request& _req,
+  calypso_thruster::GetThrusterConversionFcn::Response& _res)
 {
   _res.fcn.function_name = this->conversionFunction->GetType();
 

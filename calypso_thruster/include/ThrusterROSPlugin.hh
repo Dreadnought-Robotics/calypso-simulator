@@ -20,21 +20,21 @@
 #include <string>
 #include <vector>
 
-#include <uuv_gazebo_plugins/ThrusterPlugin.hh>
+#include <calypso_thruster/ThrusterPlugin.hh>
 
 #include <boost/scoped_ptr.hpp>
 #include <gazebo/common/Plugin.hh>
 #include <ros/ros.h>
-#include <uuv_gazebo_ros_plugins_msgs/FloatStamped.h>
+#include <calypso_thruster/FloatStamped.h>
 #include <geometry_msgs/WrenchStamped.h>
 #include <std_msgs/Bool.h>
 #include <std_msgs/Float64.h>
 
-#include <uuv_gazebo_ros_plugins_msgs/SetThrusterState.h>
-#include <uuv_gazebo_ros_plugins_msgs/GetThrusterState.h>
-#include <uuv_gazebo_ros_plugins_msgs/SetThrusterEfficiency.h>
-#include <uuv_gazebo_ros_plugins_msgs/GetThrusterEfficiency.h>
-#include <uuv_gazebo_ros_plugins_msgs/GetThrusterConversionFcn.h>
+#include <calypso_thruster/SetThrusterState.h>
+#include <calypso_thruster/GetThrusterState.h>
+#include <calypso_thruster/SetThrusterEfficiency.h>
+#include <calypso_thruster/GetThrusterEfficiency.h>
+#include <calypso_thruster/GetThrusterConversionFcn.h>
 
 namespace uuv_simulator_ros
 {
@@ -54,7 +54,7 @@ namespace uuv_simulator_ros
 
     /// \brief Set new set point (desired thrust [N]) for thruster.
     public: void SetThrustReference(
-        const uuv_gazebo_ros_plugins_msgs::FloatStamped::ConstPtr &_msg);
+        const calypso_thruster::FloatStamped::ConstPtr &_msg);
 
     /// \brief Return the ROS publish period.
     public: gazebo::common::Time  GetRosPublishPeriod();
@@ -70,38 +70,38 @@ namespace uuv_simulator_ros
 
     /// \brief Set the thrust efficiency factor
     public: bool SetThrustForceEfficiency(
-      uuv_gazebo_ros_plugins_msgs::SetThrusterEfficiency::Request& _req,
-      uuv_gazebo_ros_plugins_msgs::SetThrusterEfficiency::Response& _res);
+      calypso_thruster::SetThrusterEfficiency::Request& _req,
+      calypso_thruster::SetThrusterEfficiency::Response& _res);
 
     /// \brief Get the thrust efficiency factor
     public: bool GetThrustForceEfficiency(
-      uuv_gazebo_ros_plugins_msgs::GetThrusterEfficiency::Request& _req,
-      uuv_gazebo_ros_plugins_msgs::GetThrusterEfficiency::Response& _res);
+      calypso_thruster::GetThrusterEfficiency::Request& _req,
+      calypso_thruster::GetThrusterEfficiency::Response& _res);
 
     /// \brief Set the dynamic state efficiency factor
     public: bool SetDynamicStateEfficiency(
-      uuv_gazebo_ros_plugins_msgs::SetThrusterEfficiency::Request& _req,
-      uuv_gazebo_ros_plugins_msgs::SetThrusterEfficiency::Response& _res);
+      calypso_thruster::SetThrusterEfficiency::Request& _req,
+      calypso_thruster::SetThrusterEfficiency::Response& _res);
 
       /// \brief Get the dynamic state efficiency factor
     public: bool GetDynamicStateEfficiency(
-        uuv_gazebo_ros_plugins_msgs::GetThrusterEfficiency::Request& _req,
-        uuv_gazebo_ros_plugins_msgs::GetThrusterEfficiency::Response& _res);
+        calypso_thruster::GetThrusterEfficiency::Request& _req,
+        calypso_thruster::GetThrusterEfficiency::Response& _res);
 
     /// \brief Turn thruster on/off
     public: bool SetThrusterState(
-      uuv_gazebo_ros_plugins_msgs::SetThrusterState::Request& _req,
-      uuv_gazebo_ros_plugins_msgs::SetThrusterState::Response& _res);
+      calypso_thruster::SetThrusterState::Request& _req,
+      calypso_thruster::SetThrusterState::Response& _res);
 
     /// \brief Get thruster state
     public: bool GetThrusterState(
-      uuv_gazebo_ros_plugins_msgs::GetThrusterState::Request& _req,
-      uuv_gazebo_ros_plugins_msgs::GetThrusterState::Response& _res);
+      calypso_thruster::GetThrusterState::Request& _req,
+      calypso_thruster::GetThrusterState::Response& _res);
 
     /// \brief Get thruster conversion function parameters
     public: bool GetThrusterConversionFcn(
-      uuv_gazebo_ros_plugins_msgs::GetThrusterConversionFcn::Request& _req,
-      uuv_gazebo_ros_plugins_msgs::GetThrusterConversionFcn::Response& _res);
+      calypso_thruster::GetThrusterConversionFcn::Request& _req,
+      calypso_thruster::GetThrusterConversionFcn::Response& _res);
 
     /// \brief Map of thruster services
     private: std::map<std::string, ros::ServiceServer> services;
