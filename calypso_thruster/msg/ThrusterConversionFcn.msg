@@ -13,5 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
----
-calypso_thruster/ThrusterConversionFcn fcn
+string function_name
+string[] tags
+float64[] data
+float64[] lookup_table_input
+float64[] lookup_table_output

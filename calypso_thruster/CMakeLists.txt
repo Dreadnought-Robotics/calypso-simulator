@@ -9,6 +9,9 @@ find_package(catkin REQUIRED COMPONENTS
   message_generation
   visualization_msgs
   sensor_msgs
+  gazebo_dev
+  tf2_ros
+  tf2
 )
 
 find_package(catkin REQUIRED COMPONENTS gazebo_dev)
@@ -17,28 +20,14 @@ find_package(Eigen3 REQUIRED)
 find_package(Protobuf REQUIRED)
 
 file(MAKE_DIRECTORY ${PROJECT_BINARY_DIR}/msgs)
-
-catkin_package(
-  INCLUDE_DIRS 
-    include 
-    ${CMAKE_CURRENT_BINARY_DIR} # for generated messages
-    ${GAZEBO_MSG_INCLUDE_DIRS} 
-  LIBRARIES
-    calypso_thruster_plugin
-    calypso_dynamics
-    calypso_thruster_ros_plugin
-  CATKIN_DEPENDS
-    sensor_msgs
-    std_msgs
-    geometry_msgs
-    message_runtime
-)
+file(GLOB msgs msgs/*.proto)
 
 ################################################################
-############## MESSAGE AND LISTS ###############################
+##################### sets #####################################
 ################################################################
 
 set(CALYPSO_GAZEBO_PLUGINS_LIST "")
+
 
 set(PROTOBUF_IMPORT_DIRS "")
 foreach(ITR ${GAZEBO_INCLUDE_DIRS})
@@ -54,7 +43,9 @@ foreach(ITR ${GAZEBO_INCLUDE_DIRS})
   endif()
 endforeach()
 
-file(GLOB msgs msgs/*.proto)
+################################################
+## Declare ROS messages, services and actions ##
+################################################
 
 add_message_files(
   FILES
@@ -75,11 +66,38 @@ generate_messages(
   DEPENDENCIES
   std_msgs
   geometry_msgs
+  visualization_msgs
+  sensor_msgs
 )
 
-#####################################################################
-############### INCLUDE DIRS ########################################
-#####################################################################
+###################################
+## catkin specific configuration ##
+###################################
+
+catkin_package(
+  INCLUDE_DIRS 
+    include 
+    ${CMAKE_CURRENT_BINARY_DIR} # for generated messages
+    ${GAZEBO_MSG_INCLUDE_DIRS} 
+  LIBRARIES
+    calypso_thruster_plugin
+    calypso_dynamics
+    calypso_thruster_ros_plugin
+  CATKIN_DEPENDS
+    sensor_msgs
+    std_msgs
+    geometry_msgs
+    message_runtime
+)
+
+link_directories(
+  ${GAZEBO_LIBRARY_DIRS}
+  ${EIGEN3_LIBRARY_DIRS}
+)
+
+###########
+## Build ##
+###########
 
 include_directories(
   ${PROJECT_SOURCE_DIR}/include
@@ -92,63 +110,45 @@ include_directories(
   ${EIGEN3_INCLUDE_DIRS}
 )
 
-link_directories(
-  ${GAZEBO_LIBRARY_DIRS}
-  ${EIGEN3_LIBRARY_DIRS}
-)
-
-#####################################################################
-################## BUILD MAKE FILES #################################
-#####################################################################
-
-protobuf_generate_cpp(PROTO_SRCS PROTO_HDRS ${msgs})
 add_library(calypso_gazebo_plugins_msgs SHARED ${PROTO_SRCS})
-target_link_libraries(calypso_gazebo_plugins_msgs ${PROTOBUF_LIBRARY})
-list(APPEND CALYPSO_GAZEBO_PLUGINS_LIST calypso_gazebo_plugins_msgs)
-
-#####################################################################
-##################### DYNAMICS ######################################
-#####################################################################
 
 add_library(calypso_dynamics
     SHARED
-    src/Dynamics.cc
+    src/Dynamics.cc 
 )
-list(APPEND CALYPSO_GAZEBO_PLUGINS_LIST calyspos_dynamics)
-
-####################################################################
-################### THRUSTER ROS PLUGIN ############################
-####################################################################
 
 add_library(calypso_thruster_ros_plugin src/ThrusterROSPlugin.cc)
-target_link_libraries(calypso_thruster_ros_plugin ${catkin_LIBRARIES})
-add_dependencies(calypso_thruster_ros_plugin ${catkin_EXPORTED_TARGETS})
-list(APPEND CALYPSO_GAZEBO_ROS_PLUGINS_LIST calyspo_thruster_ros_plugin)
 
-#####################################################################
-##################### Calypso_thruster_plugin #######################
-#####################################################################
 
 add_library(calypso_thruster_plugin
     src/ThrusterConversionFcn.cc
     src/ThrusterPlugin.cc
 )
+
+add_dependencies(calypso_thruster_ros_plugin ${catkin_EXPORTED_TARGETS})
+add_dependencies(calypso_thruster_plugin calypso_gazebo_plugins_msgs ${catkin_EXPORTED_TARGETS})
+
+target_link_libraries(calypso_gazebo_plugins_msgs ${PROTOBUF_LIBRARY})
+target_link_libraries(calypso_thruster_ros_plugin ${catkin_LIBRARIES})
 target_link_libraries(calypso_thruster_plugin
     calypso_dynamics
     calypso_gazebo_plugins_msgs
     ${catkin_LIBRARIES}
     ${Boost_LIBRARIES})
 
-    add_dependencies(calypso_thruster_plugin
-    calypso_gazebo_plugins_msgs
-    ${catkin_EXPORTED_TARGETS})
+####################################################################
+################# APPEND LISTS #####################################
+####################################################################
+
+protobuf_generate_cpp(PROTO_SRCS PROTO_HDRS ${msgs})
+
+list(APPEND CALYPSO_GAZEBO_PLUGINS_LIST calypso_gazebo_plugins_msgs)
+
+list(APPEND CALYPSO_GAZEBO_PLUGINS_LIST calypso_dynamics)
+
+list(APPEND CALYPSO_GAZEBO_ROS_PLUGINS_LIST calypso_thruster_ros_plugin)
 
 list(APPEND CALYPSO_GAZEBO_PLUGINS_LIST calypso_thruster_plugin)
-
-#####################################################################
-#####################################################################
-#####################################################################
-
 
 #########################################################################
 ##################### INSTALL TARGETS ###################################
