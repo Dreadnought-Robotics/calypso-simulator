@@ -1,0 +1,12 @@
+package gazebo_thruster.msgs;
+
+message Thruster
+{
+    required string     name = 1;
+    optional double     effort = 2;
+}
+
+message Thrusters
+{
+    repeated Thruster   thrusters = 1;
+}

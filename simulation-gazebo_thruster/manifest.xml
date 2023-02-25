@@ -1,0 +1,15 @@
+<package>
+  <description brief="Gazebo model plugin to simulate underwater thrusters">
+  
+  </description>
+  <author>Thomio Watanabe/thomio.watanabe@fieb.org.br</author>
+  <license></license>
+  <url>http://</url>
+  <logo>http://</logo>
+  <depend package="base/cmake" />
+  <depend package="simulation/gazebo" />
+  <depend package="simulation/gazebo_underwater" />
+  <depend package="libprotobuf" />
+  <depend package="protobuf-compiler" />
+  <depend package="control/sdformat" />
+</package>

@@ -1,0 +1,23 @@
+package gazebo_underwater.msgs;
+import "vector3d.proto";
+
+message Matrix3
+{
+    required gazebo.msgs.Vector3d   x = 1;
+    required gazebo.msgs.Vector3d   y = 2;
+    required gazebo.msgs.Vector3d   z = 3;
+}
+
+message Matrix6
+{
+    required Matrix3   tl = 1;
+    required Matrix3   tr = 2;
+    required Matrix3   bl = 3;
+    required Matrix3   br = 4;
+}
+
+message CompensatedMass
+{
+    required Matrix6 matrix = 1;
+    required gazebo.msgs.Vector3d cog = 2;
+}
