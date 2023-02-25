@@ -57,7 +57,7 @@ class rosetta :
     # print(x,y)
     velocity=(2*math.pi*0.0381*1.5*y)/60
     
-    return y
+    return y*0.1047198
   
 
   def talker1(self,msg_gypseas):

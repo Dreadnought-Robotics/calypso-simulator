@@ -63,6 +63,7 @@
     <inertial>
       <mass value="37.00000000"/>
       <inertia ixx="1002084.26190628" ixy="-0.00000934" ixz="-0.00004849" iyy="1472890.49211890" iyz="1402.25179064" izz="689649.10160904"/>
+      <!-- <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/> -->
     </inertial>
 
     </link>
@@ -108,11 +109,11 @@
     </xacro:thruster_CW>
 
 
-    <!-- <xacro:camera id="1" parent="base_link" xyz="-0.005 -0.25 0.25" rpy="0 0 -1.57">
+    <xacro:camera id="1" parent="base_link" xyz="-0.005 -0.25 0.25" rpy="0 0 -1.57">
     </xacro:camera>
 
     <xacro:imu id="1" parent="base_link" xyz="-0.02 0.1 0.25" rpy="0 0 -1.57">
-    </xacro:imu> -->
+    </xacro:imu>
 
     <gazebo>
       <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
@@ -130,7 +131,7 @@
       <link name='base_link'>
         <buoyancy>
           <compensation>0</compensation>
-          <origin xyz= "${x} ${y} ${z}"/>
+          <origin xyz="0 0 0"/>
         </buoyancy>
       </link>
     </plugin>
