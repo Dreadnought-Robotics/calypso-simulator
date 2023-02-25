@@ -29,7 +29,7 @@
     <xacro:property name="y" default="0"/> -->
     <xacro:property name="x" default="-0.26"/>
     <xacro:property name="y" default="0.43"/>
-    <xacro:property name="z" default="-0.1"/>
+    <xacro:property name="z" default="0"/>
     <xacro:property name="r" default="1.57"/>
     <xacro:property name="p" default="0"/>
     <xacro:property name="Y" default="0"/>
@@ -55,14 +55,15 @@
 
       <collision>
         <geometry>
-          <mesh filename="package://calypso_sim/meshes/auv-body/auv.STL" scale="0.001 0.001 0.001"/>
+          <origin xyz="${x} ${y} ${z}" rpy="${r} ${p} ${Y}" />
+          <mesh filename="package://calypso_sim/meshes/auv-body/AUV.STL" scale="0.001 0.001 0.001"/>
         </geometry>
       </collision>
     
-      <inertial>
-        <mass value="37"/>
-        <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
-      </inertial>
+    <inertial>
+      <mass value="37.00000000"/>
+      <inertia ixx="1002084.26190628" ixy="-0.00000934" ixz="-0.00004849" iyy="1472890.49211890" iyz="1402.25179064" izz="689649.10160904"/>
+    </inertial>
 
     </link>
 
@@ -82,36 +83,36 @@
 -->
     <!-- ${x}-0.32 ${y}-0.06 ${z}+0.1 -->
 
-    <xacro:thruster_CCW id="1" parent="base_link" xyz="0.185 -0.11 0.1" rpy="0 0 0" axis="0 0 -1">
+    <xacro:thruster_CCW id="1" parent="base_link" xyz="0.185 -0.11 0.25" rpy="0 0 0" axis="0 0 -1">
     </xacro:thruster_CCW>
 
-    <xacro:thruster_CW id="2" parent="base_link" xyz="-0.2 -0.11 0.1" rpy="0 0 0" axis="0 0 1">
+    <xacro:thruster_CW id="2" parent="base_link" xyz="-0.2 -0.11 0.25" rpy="0 0 0" axis="0 0 1">
     </xacro:thruster_CW>
     
-    <xacro:thruster_CW id="4" parent="base_link" xyz="0.185 0.13 0.1" rpy="0 0 0" axis="0 0 1">
+    <xacro:thruster_CW id="4" parent="base_link" xyz="0.185 0.11 0.25" rpy="0 0 0" axis="0 0 1">
     </xacro:thruster_CW>
 
-    <xacro:thruster_CCW id="3" parent="base_link" xyz="-0.2 0.13 0.1" rpy="0 0 0" axis="0 0 -1" >
+    <xacro:thruster_CCW id="3" parent="base_link" xyz="-0.2 0.11 0.25" rpy="0 0 0" axis="0 0 -1" >
     </xacro:thruster_CCW>
 
-    <xacro:thruster_CCW id="5" parent="base_link" xyz="0.15 -0.25 0.06" rpy="0 1.57 0.785398" axis="0 0 -1">
+    <xacro:thruster_CCW id="5" parent="base_link" xyz="0.15 -0.25 0.17" rpy="0 1.57 0.785398" axis="0 0 -1">
     </xacro:thruster_CCW>
 
-    <xacro:thruster_CW id="6" parent="base_link" xyz="-0.15 -0.25 0.06" rpy="0 1.57 2.35619" axis="0 0 1">
+    <xacro:thruster_CW id="6" parent="base_link" xyz="-0.15 -0.25 0.17" rpy="0 1.57 2.35619" axis="0 0 1">
     </xacro:thruster_CW>
 
-    <xacro:thruster_CCW id="7" parent="base_link" xyz="-0.15 0.25 0.06" rpy="0 1.57 3.92" axis="0 0 -1">
+    <xacro:thruster_CCW id="7" parent="base_link" xyz="-0.15 0.25 0.17" rpy="0 1.57 3.92" axis="0 0 -1">
     </xacro:thruster_CCW>
 
-    <xacro:thruster_CW id="8" parent="base_link" xyz="0.15 0.25 0.06" rpy="0 1.57 -0.785398" axis="0 0 1">
+    <xacro:thruster_CW id="8" parent="base_link" xyz="0.15 0.25 0.17" rpy="0 1.57 -0.785398" axis="0 0 1">
     </xacro:thruster_CW>
 
 
-    <xacro:camera id="1" parent="base_link" xyz="-0.005 -0.25 0.13" rpy="0 0 -1.57">
+    <!-- <xacro:camera id="1" parent="base_link" xyz="-0.005 -0.25 0.25" rpy="0 0 -1.57">
     </xacro:camera>
 
-    <xacro:imu id="1" parent="base_link" xyz="-0.02 0.1 0.12" rpy="0 0 -1.57">
-    </xacro:imu>
+    <xacro:imu id="1" parent="base_link" xyz="-0.02 0.1 0.25" rpy="0 0 -1.57">
+    </xacro:imu> -->
 
     <gazebo>
       <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
@@ -122,15 +123,14 @@
 
     <plugin name="freebuoyancy_gazebo" filename="libfreebuoyancy_gazebo.so">
       <descriptionParam>robot_description</descriptionParam>
-      <fluidTopic>current</fluidTopic>
       <alwaysOn>true</alwaysOn>
       <surface>0 0 0</surface>
       <updateRate>.001</updateRate>
 
       <link name='base_link'>
         <buoyancy>
-          <compensation>1.01</compensation>
-          <origin xyz= "0 0 0"/>
+          <compensation>0</compensation>
+          <origin xyz= "${x} ${y} ${z}"/>
         </buoyancy>
       </link>
     </plugin>
