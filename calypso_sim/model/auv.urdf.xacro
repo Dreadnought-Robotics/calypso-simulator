@@ -54,24 +54,25 @@
 
     <xacro:thruster_CW id="2" parent="base_link" xyz="0.25 -0.32 -0.17" rpy="0 0 0" axis="0 0 1">
     </xacro:thruster_CW>
-    
-    <xacro:thruster_CW id="4" parent="base_link" xyz="-0.25 0.32 -0.17" rpy="0 0 0" axis="0 0 1">
-    </xacro:thruster_CW>
 
     <xacro:thruster_CCW id="3" parent="base_link" xyz="-0.25 -0.32 -0.17" rpy="0 0 0" axis="0 0 -1" >
     </xacro:thruster_CCW>
 
-    <!-- <xacro:thruster_CCW id="5" parent="base_link" xyz="0.41 -0.68 0.17" rpy="0 1.57 0.785398" axis="0 0 -1">
-    </xacro:thruster_CCW>
-
-    <xacro:thruster_CW id="6" parent="base_link" xyz="0.11 -0.68 0.17" rpy="0 1.57 2.35619" axis="0 0 1">
+    <xacro:thruster_CW id="4" parent="base_link" xyz="-0.25 0.32 -0.17" rpy="0 0 0" axis="0 0 1">
     </xacro:thruster_CW>
 
-    <xacro:thruster_CCW id="7" parent="base_link" xyz="0.11 -0.18 0.17" rpy="0 1.57 3.92" axis="0 0 -1">
+    <xacro:thruster_CW id="5" parent="base_link" xyz="0.45 0.2 0" rpy="0 1.57 2.35619" axis="0 0 1">
+    </xacro:thruster_CW>
+
+    <xacro:thruster_CCW id="6" parent="base_link" xyz="0.45 -0.2 0" rpy="0 1.57 3.92" axis="0 0 -1">
     </xacro:thruster_CCW>
 
-    <xacro:thruster_CW id="8" parent="base_link" xyz="0.41 -0.18 0.17" rpy="0 1.57 -0.785398" axis="0 0 1">
-    </xacro:thruster_CW> -->
+    <xacro:thruster_CW id="7" parent="base_link" xyz="-0.45 -0.2 0" rpy="0 1.57 -0.785398" axis="0 0 1">
+    </xacro:thruster_CW>
+
+    <xacro:thruster_CCW id="8" parent="base_link" xyz="-0.45 0.2 0" rpy="0 1.57 0.785398" axis="0 0 -1">
+    </xacro:thruster_CCW>
+
 
 
     <xacro:camera id="1" parent="base_link" xyz="0.3 0 0" rpy="0 0 0">
