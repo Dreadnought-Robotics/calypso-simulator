@@ -159,14 +159,5 @@
 
       </link>
     </model>
-
-    <plugin name="freefloating_gazebo_fluid" filename="libfreefloating_gazebo_fluid.so">
-      <descriptionParam>robot_description</descriptionParam>
-      <fluidTopic>current</fluidTopic>
-      <alwaysOn>true</alwaysOn>
-      <surface>0 0 40</surface>
-      <updateRate>.001</updateRate>
-    </plugin>
-    
-  </world>
+  </world>  
 </sdf>
