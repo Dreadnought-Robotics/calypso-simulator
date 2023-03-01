@@ -1,4 +1,3 @@
-#!/usr/bin/python3.8
 import rospy
 from std_msgs.msg import Float64
 from std_msgs.msg import Int64
