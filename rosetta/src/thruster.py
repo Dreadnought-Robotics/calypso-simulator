@@ -45,6 +45,9 @@ class rosetta :
       y=y+ 6.25*(math.e**-7)*(x**6) + -2.41*(math.e**-10)*(x**7) + 6.09*(math.e**-14)*(x**8) + -9.06*(math.e**-18)*(x**9) 
       y=y+ 6.04*(math.e**-22)*(x**10)
 
+    if x<1472:
+      y=-y
+
     return y*0.1047198
 
   def old_converter(self,x):
