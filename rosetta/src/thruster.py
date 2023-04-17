@@ -35,42 +35,42 @@ class rosetta :
     
     self.rate = rospy.Rate(10)
 
-  def converter(self,x):
+  # def converter(self,x):
   
-    if (x>=1472 and x<=1528):
-      y=0
+  #   if (x>=1472 and x<=1528):
+  #     y=0
     
-    else:
-      y = 873445.5884049138 + -3060.828578480122*x + 4.270869048814241*x**2 + -0.002944908465733391*x**3 + 1.0007672335895403e-06*x**4 + -1.3418449357438108e-10*x**5
-    
-    if x==0:
-      y=0
-
-    if x<1472:
-       y=-y
-
-    return y *0.1047198
-
-  # def old_converter(self,x):
-  #   # X=pwm Y=rpm
-  #   coeffs = list()
-  #   coeffs.append(-1.6453836430727448e-05)
-  #   coeffs.append(0.07440821248059681)
-  #   coeffs.append(-100.45437634228745)
-  #   coeffs.append(38769.58439545923)
-  #   # [-1.6453836430727448e-05, 0.07440821248059681, -100.45437634228745, 38769.58439545923]
-  #   # print(coeffs)
-  #   if (x>1470 and x<1530):
-  #     y = 0
-
   #   else:
-  #     y = x**3*coeffs[0] + x**2*coeffs[1] + x*coeffs[2] + coeffs[3] 
-
-  #   if (x<1000 or x>2000):
-  #     y = 0
-  #   # print(x,y)
+  #     y = 873445.5884049138 + -3060.828578480122*x + 4.270869048814241*x**2 + -0.002944908465733391*x**3 + 1.0007672335895403e-06*x**4 + -1.3418449357438108e-10*x**5
     
-  #   return round(round(y, 4)*0.1047198,4)
+  #   if x==0:
+  #     y=0
+
+  #   if x<1472:
+  #      y=-y
+
+  #   return y *0.1047198
+
+  def converter(self,x):
+    # X=pwm Y=rpm
+    coeffs = list()
+    coeffs.append(-1.6453836430727448e-05)
+    coeffs.append(0.07440821248059681)
+    coeffs.append(-100.45437634228745)
+    coeffs.append(38769.58439545923)
+    # [-1.6453836430727448e-05, 0.07440821248059681, -100.45437634228745, 38769.58439545923]
+    # print(coeffs)
+    if (x>1470 and x<1530):
+      y = 0
+
+    else:
+      y = x**3*coeffs[0] + x**2*coeffs[1] + x*coeffs[2] + coeffs[3] 
+
+    if (x<1000 or x>2000):
+      y = 0
+    # print(x,y)
+    
+    return round(round(y, 4)*0.1047198,4)
   
 
   def talker1(self,msg_gypseas):
