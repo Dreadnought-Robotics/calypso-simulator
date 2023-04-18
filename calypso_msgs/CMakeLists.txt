@@ -53,7 +53,6 @@ add_message_files(
   FILES
   gypseas.msg
   dolphins.msg
-  buoy.msg
 )
 
 ## Generate services in the 'srv' folder
