@@ -3,8 +3,7 @@
     <arg name="debug" default="false" />
     <arg name="gui" default="true" />
     <arg name="pause" default="false" />
-    <arg name="world" default="$(find calypso_sim)/worlds/blue.world" />
-    <param name="robot_description" command="$(find xacro)/xacro $(find calypso_sim)/model/auv.urdf.xacro"  /> 
+    <arg name="world" default="$(find calypso_sim)/worlds/blue.world" /> 
 
     <!-- include gazebo_ros launcher -->
     <include file="$(find gazebo_ros)/launch/empty_world.launch">
@@ -14,38 +13,5 @@
       <arg name="paused" value="$(arg pause)" />
       <arg name="use_sim_time" value="true" />
     </include>
-
-      <!-- Robot pose -->
-    <arg name="x" default="0"/>
-    <arg name="y" default="0"/>
-    <arg name="z" default="3"/>
-    <arg name="roll" default="0"/>
-    <arg name="pitch" default="0"/>
-    <arg name="yaw" default="0"/>
-
-    <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args=" -param robot_description -urdf -model auv 
-      -x $(arg x) -y $(arg y) -z $(arg z)
-      -R $(arg roll) -P $(arg pitch) -Y $(arg yaw)"/>
-
-    <node name="RSP" pkg="robot_state_publisher" type="robot_state_publisher" respawn="false" output="screen">
-      <param name="publish_frequency" type="double" value="5.0" />
-    </node>
-  
-    <node name="JSP" pkg="joint_state_publisher" type="joint_state_publisher" output="screen"/>
-
-    <rosparam command="load" file="$(find calypso_sim)/config/controllers.yaml"/>
-    
-    <node name="Controller_Spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" args="
-    joint_state_controller 
-    thruster_1_controller 
-    thruster_2_controller 
-    thruster_3_controller 
-    thruster_4_controller
-    thruster_5_controller
-    thruster_6_controller
-    thruster_7_controller
-    thruster_8_controller"/>
-    
-    <include file="$(find calypso_sim)/launch/rosetta.launch"/>
 
 </launch>

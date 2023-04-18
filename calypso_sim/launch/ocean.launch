@@ -4,8 +4,7 @@
     <arg name="gui" default="true" />
     <arg name="pause" default="true" />
     <arg name="world" default="$(find calypso_sim)/worlds/boat.world" />
-    <param name="robot_description" command="$(find xacro)/xacro $(find calypso_sim)/model/auv.urdf.xacro"  /> 
-
+    
     <!-- include gazebo_ros launcher -->
     <include file="$(find gazebo_ros)/launch/empty_world.launch">
       <arg name="world_name" value="$(arg world)" />

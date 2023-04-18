@@ -164,7 +164,6 @@ include_directories(
  
  catkin_install_python(PROGRAMS
    src/thruster.py
-   src/imu.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
  )
 

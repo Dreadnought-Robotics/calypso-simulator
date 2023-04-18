@@ -1,0 +1,6 @@
+<launch>
+
+  <node name="dolphins_pid" pkg="calypso_pid_beta" type="pid_dolphins.py"></node>
+  <node name="gypseas_pid" pkg="calypso_pid_beta" type="pid_gypseas.py"></node>
+
+</launch>

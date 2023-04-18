@@ -1,0 +1,22 @@
+<launch>
+
+  <node name="RSP" pkg="robot_state_publisher" type="robot_state_publisher" respawn="false" output="screen">
+    <param name="publish_frequency" type="double" value="5.0" />
+  </node>
+
+  <node name="JSP" pkg="joint_state_publisher" type="joint_state_publisher" output="screen"/>
+
+  <rosparam command="load" file="$(find calypso_sim)/config/controllers.yaml"/>
+  
+  <node name="Controller_Spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" args="
+  joint_state_controller 
+  thruster_1_controller 
+  thruster_2_controller 
+  thruster_3_controller 
+  thruster_4_controller
+  thruster_5_controller
+  thruster_6_controller
+  thruster_7_controller
+  thruster_8_controller"/>
+
+</launch>
