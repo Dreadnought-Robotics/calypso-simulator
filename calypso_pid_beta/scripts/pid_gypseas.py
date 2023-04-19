@@ -42,7 +42,6 @@ class pid_gypseas:
 
     # CORD=rospy.Subscriber("/calypso_sim/heading", Quaternion, self.Heading_subscriber)
     # fir testing purpose
-    self.heave.final=3
     PID_pitch = PID.getPID(self.pitch,True)
     PID_roll = PID.getPID(self.roll,True)
     # PID_heave = PID.getPID(self.heave, False)
