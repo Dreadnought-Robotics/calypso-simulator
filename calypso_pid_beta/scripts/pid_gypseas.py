@@ -7,7 +7,8 @@ from pid_calypso import pid as PID
 from geometry_msgs.msg import Quaternion
 from scipy.interpolate import interp1d
 from tf.transformations import euler_from_quaternion
-import time 
+import time
+from scipy.interpolate import interp1d 
 # from scipy.integrate import trapezoid
 
 class pid_gypseas:
@@ -22,9 +23,9 @@ class pid_gypseas:
     self.heave=PID()
     self.yaw=PID()
 
-    self.pitch.k=[2,0.5,0.05]
-    self.roll.k=[2,0.5,0.05]
-    self.heave.k=[2,0.5,0.005]
+    self.pitch.k=[1,0.5,0.05]
+    self.roll.k=[1,0.5,0.05]
+    self.heave.k=[1,0.5,0.005]
           
     self.throttle1 = 1580
     self.throttle2 = 1580
@@ -56,11 +57,13 @@ class pid_gypseas:
     #   PID_heave = self.n(PID_heave_)
     # for testing gyro PID, comment the PID_heave part.
 
+    a=[0,90]
+    b=[1580,1800]
     self.g=gypseas()
-    self.g.t1 = round(self.throttle1 + PID_roll - PID_pitch + PID_heave)
-    self.g.t2 = round(self.throttle2 - PID_roll - PID_pitch + PID_heave)
-    self.g.t3 = round(self.throttle3 - PID_roll + PID_pitch + PID_heave)
-    self.g.t4 = round(self.throttle4 + PID_roll + PID_pitch + PID_heave)
+    self.g.t1 = round(self.roll.interpolate((PID_roll - PID_pitch + PID_heave),a,b))
+    self.g.t2 = round(self.roll.interpolate((- PID_roll - PID_pitch + PID_heave),a,b))
+    self.g.t3 = round(self.roll.interpolate((- PID_roll + PID_pitch + PID_heave),a,b))
+    self.g.t4 = round(self.roll.interpolate((PID_roll + PID_pitch + PID_heave),a,b))
 
     # self.g=gypseas()
     # self.g.t1 = round(PID_heave + PID_roll - PID_pitch)
@@ -68,8 +71,10 @@ class pid_gypseas:
     # self.g.t3 = round(PID_heave - PID_roll + PID_pitch)
     # self.g.t4 = round(PID_heave + PID_roll + PID_pitch)
 
-    print("PID-roll : ", PID_roll ," PID-pitch : ",PID_pitch, " PID-heave : ", PID_heave)
-
+    #print("PID-roll : ", PID_roll ," PID-pitch : ",PID_pitch, " PID-heave : ", PID_heave)
+    print("current z :",self.heave.current_position)
+    print("goal z :",self.heave.final)
+    print(self.g)
     self.gypseas_publisher.publish(self.g)
     self.rate.sleep()
       

@@ -18,9 +18,9 @@ class pid_dolphins:
     self.surge=PID()
     self.sway=PID()
 
-    self.yaw.k=[2,0.5,0.05]
-    self.surge.k=[2,0.5,0.005]
-    self.sway.k=[2,0.5,0.005]
+    self.yaw.k=[1,0.5,0.05]
+    self.surge.k=[1,0.5,0.005]
+    self.sway.k=[1,0.5,0.005]
 
     self.throttle1 = 1650
     self.throttle2 = 1650
@@ -68,10 +68,10 @@ class pid_dolphins:
     # self.d.d4 = round(self.throttle4 - PID_yaw + PID_surge_pos + PID_sway_pos)
 
     self.d=dolphins()
-    self.d.d1 = round(self.throttle1 + PID_yaw + PID_surge - PID_sway)
-    self.d.d2 = round(self.throttle2 - PID_yaw + PID_surge + PID_sway)
-    self.d.d3 = round(self.throttle3 + PID_yaw - PID_surge - PID_sway)
-    self.d.d4 = round(self.throttle4 - PID_yaw - PID_surge + PID_sway)
+    self.d.d1 = self.surge.floor_thruster(round(self.throttle1 + PID_yaw + PID_surge - PID_sway),1570)
+    self.d.d2 = self.surge.floor_thruster(round(self.throttle2 - PID_yaw + PID_surge + PID_sway),1570)
+    self.d.d3 = self.surge.floor_thruster(round(self.throttle3 + PID_yaw - PID_surge - PID_sway),1570)
+    self.d.d4 = self.surge.floor_thruster(round(self.throttle4 - PID_yaw - PID_surge + PID_sway),1570)
 
     print("PID-yaw : ",PID_yaw)
     print("PID-surge : ",PID_surge, "PID-sway : ", PID_sway)

@@ -18,6 +18,17 @@ class pid:
         self.acc = [0]
         self.vel = [0]
     
+    def floor_thruster(self,x,val):
+        if x<val:
+            return val
+        else :
+            return x
+    
+    def interpolate(self,s,a,b):
+
+        return b[0]+((s-a[0])*(b[1]-b[0])/(a[1]-a[0]))
+        
+    
     def integrate(self, y, x):
         try:
             return trapezoid(y, x)
@@ -65,7 +76,7 @@ class pid:
             feedforward=0
         
         try:
-            pid_d = kd*(error[-1]-self.error[-2]) 
+            pid_d = kd*(error[-1]-self.error[-2])/(self.time[-2]-self.time[-1]) 
         except:
             pass
 
