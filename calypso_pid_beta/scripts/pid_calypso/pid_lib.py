@@ -9,25 +9,14 @@ class pid:
       
         self.k=[]
         self.pid_i=0
-        self.error=[0]
-        self.time=[0]
+        self.error=[]
+        self.time=[]
         self.current_vel=0
         self.prev_vel=0
         self.current_position=0
         self.final=0
-        self.acc = [0]
-        self.vel = [0]
-    
-    def floor_thruster(self,x,val):
-        if x<val:
-            return val
-        else :
-            return x
-    
-    def interpolate(self,s,a,b):
-
-        return b[0]+((s-a[0])*(b[1]-b[0])/(a[1]-a[0]))
-        
+        self.acc = []
+        self.vel = []
     
     def integrate(self, y, x):
         try:
@@ -47,7 +36,8 @@ class pid:
     def get_current_pose(self):
         
         print("pose")
-        self.vel.append(self.integrate(self.acc,self.time))
+        vel = self.integrate(self.acc,self.time)
+        self.vel.append(vel)
         return self.integrate(self.vel,self.time)
 
     def getPID(self,feed_forward=False):
@@ -62,12 +52,10 @@ class pid:
         
         # this 'self.value' will be the ros subscriber cam feed - the distance that is left to travel.
         # error = self.final
-        
         self.error.append(error)
 
         pid_i = self.integrate(self.error, self.time)
         
-        self.pid_i=pid_i
         pid_p = kp*error
 
         if(feed_forward):
@@ -76,7 +64,7 @@ class pid:
             feedforward=0
         
         try:
-            pid_d = kd*(error[-1]-self.error[-2])/(self.time[-2]-self.time[-1]) 
+            pid_d = kd*(error[-1]-self.error[-2]) 
         except:
             pass
 
@@ -96,9 +84,9 @@ class pid:
             PID = pid_p + pid_i_final + pid_d
         self.prev_vel = self.current_vel
         
-        if(PID > 75):
-            PID=75
-        if(PID < -75):
-            PID=-75
+        if(PID > 90):
+            PID=90
+        if(PID < -90):
+            PID=-90
         
         return PID
