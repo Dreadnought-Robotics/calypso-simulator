@@ -22,7 +22,7 @@ class pid_gypseas:
 
     self.pitch.k=[2,0.5,0.05]
     self.roll.k=[2,0.5,0.05]
-    self.heave.k=[11,0.715,1.95]
+    self.heave.k=[11,0.165,8.95]
           
     self.throttle1 = 1580
     self.throttle2 = 1580
@@ -42,6 +42,7 @@ class pid_gypseas:
 
     # CORD=rospy.Subscriber("/calypso_sim/heading", Quaternion, self.Heading_subscriber)
     # fir testing purpose
+    self.heave.final=3
     PID_pitch = PID.getPID(self.pitch,True)
     PID_roll = PID.getPID(self.roll,True)
     # PID_heave = PID.getPID(self.heave, False)
