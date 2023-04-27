@@ -9,7 +9,6 @@
   <rosparam command="load" file="$(find calypso_sim)/config/controllers.yaml"/>
   
   <node name="Controller_Spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" args="
-  joint_state_controller 
   thruster_1_controller 
   thruster_2_controller 
   thruster_3_controller 

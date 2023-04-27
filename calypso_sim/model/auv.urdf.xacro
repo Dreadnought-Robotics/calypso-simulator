@@ -74,12 +74,166 @@
     </xacro:thruster_CCW>
 
 
-
+<!-- 
     <xacro:camera id="1" parent="base_link" xyz="0.3 0 0" rpy="0 0 0">
-    </xacro:camera>
+    </xacro:camera> -->
 
     <xacro:imu id="1" parent="base_link" xyz="0 0 0.15" rpy="0 0 -1.57">
     </xacro:imu>
+
+<!-- this is for the 2d camera in the bottom -->
+    <link name="camera_bottom">
+      <visual>
+        <geometry>
+          <box size="0.05 0.05 0.05"/>
+        </geometry>
+        <material name="red"/>
+      </visual>
+      <collision>
+        <geometry>
+          <box size="0.05 0.05 0.05"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <mass value="1.5"/>
+        <origin xyz="0.0 0.0 0.0" rpy="0 0 0"/>
+        <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0"/>
+      </inertial>
+    </link>
+
+    <joint name="base_link_to_camera_bottom_joint" type="fixed">
+      <parent link="base_link"/>
+      <child link="camera_bottom"/>
+      <origin xyz="0 0 -0.19" rpy="1.57 1.57 0"/>
+    </joint>
+
+    <joint name="camera_optical_joint_bottom" type="fixed">
+      <parent link="camera_bottom"/>
+      <child link="camera_link_optical_bottom"/>
+      <origin xyz="0 0 0" rpy="${-pi/2} 0 ${-pi/2}"/>
+    </joint>
+
+    <link name="camera_link_optical_bottom"></link>
+
+    <gazebo reference="camera_bottom">
+      <material>Gazebo/Red</material>
+
+      <sensor name="camera" type="camera">
+        <pose> 0 0 0 0 0 0 </pose>
+        <visualize>true</visualize>
+        <update_rate>10</update_rate>
+        <camera>
+          <horizontal_fov>1.089</horizontal_fov>
+          <image>
+            <format>R8G8B8</format>
+            <width>640</width>
+            <height>480</height>
+          </image>
+          <clip>
+            <near>0.05</near>
+            <far>8.0</far>
+          </clip>
+        </camera>
+        <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
+          <frame_name>camera_link_optical_bottom</frame_name>
+          <cameraName>calypso_sim/camera_bottom</cameraName>
+          <imageTopicName>image_raw</imageTopicName>
+        </plugin>
+      </sensor>
+    </gazebo>
+
+<!-- this is for the depth camera in the front -->
+    <link name="camera_front">
+      <visual>
+        <geometry>
+          <box size="0.05 0.05 0.05"/>
+        </geometry>
+        <material name="red"/>
+      </visual>
+      <collision>
+        <geometry>
+          <box size="0.05 0.05 0.05"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <mass value="1.5"/>
+        <origin xyz="0.0 0.0 0.0" rpy="0 0 0"/>
+        <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0"/>
+      </inertial>
+    </link>
+
+    <joint name="base_link_to_camera_front_joint" type="fixed">
+      <parent link="base_link"/>
+      <child link="camera_front"/>
+      <origin xyz="0.3 0 0" rpy="0 0 0"/>
+    </joint>
+
+    <joint name="camera_optical_joint_front" type="fixed">
+      <parent link="camera_front"/>
+      <child link="camera_link_optical_front"/>
+      <origin xyz="0 0 0" rpy="${-pi/2} 0 ${-pi/2}"/>
+    </joint>
+
+    <link name="camera_link_optical_front"></link>
+
+    <gazebo reference="camera_front">
+      <material>Gazebo/Red</material>
+
+      <sensor name="camera" type="depth">
+        <pose> 0 0 0 0 0 0 </pose>
+        <visualize>true</visualize>
+        <update_rate>10</update_rate>
+        <camera>
+          <horizontal_fov>1.089</horizontal_fov>
+          <image>
+            <format>B8G8R8</format>
+            <width>640</width>
+            <height>480</height>
+          </image>
+          <clip>
+            <near>0.05</near>
+            <far>8.0</far>
+          </clip>
+        </camera>
+        <plugin name="camera_plugin" filename="libgazebo_ros_openni_kinect.so">
+          <frame_name>camera_link_optical_front</frame_name>
+          <!-- <min_depth>0.1</min_depth>
+          <max_depth>100.0</max_depth> -->
+          <!-- <cameraName>calypso_sim/camera_front</cameraName>
+          <imageTopicName>image_raw</imageTopicName>
+          <depthImageTopicName>/calypso_sim/camera_front/image_raw</depthImageTopicName>
+          <pointCloudTopicName>/calypso_sim/camera_front/points</pointCloudTopicName>
+          <frameName>camera_link</frameName>
+          <pointCloudCutoff>0.5</pointCloudCutoff>
+          <pointCloudCutoffMax>3.0</pointCloudCutoffMax> -->
+
+          <alwaysOn>true</alwaysOn>
+          <!-- <updateRate>0.0</updateRate> -->
+          <cameraName>calypso_sim/camera_front</cameraName>
+          <imageTopicName>/yash_cam/image_raw</imageTopicName>
+          <!-- <cameraInfoTopicName>camera_info</cameraInfoTopicName> -->
+          <depthImageTopicName>image_raw</depthImageTopicName>
+          <depthImageCameraInfoTopicName>camera_info</depthImageCameraInfoTopicName>
+          <pointCloudTopicName>points</pointCloudTopicName>
+          <!-- <frameName>camera_link</frameName> -->
+          <pointCloudCutoff>0.5</pointCloudCutoff>
+          <pointCloudCutoffMax>3.0</pointCloudCutoffMax>
+          <!-- <distortionK1>0</distortionK1>
+          <distortionK2>0</distortionK2>
+          <distortionK3>0</distortionK3>
+          <distortionT1>0</distortionT1>
+          <distortionT2>0</distortionT2>
+          <CxPrime>0</CxPrime>
+          <Cx>0</Cx>
+          <Cy>0</Cy>
+          <focalLength>0</focalLength>
+          <hackBaseline>0</hackBaseline> -->
+
+        </plugin>
+      </sensor>
+    </gazebo>
+
+    
 
     <gazebo>
       <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
