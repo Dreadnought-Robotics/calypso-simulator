@@ -5,7 +5,6 @@
   <include file="$(find calypso_sim)/launch/spawn.launch" />
   <include file="$(find calypso_sim)/launch/controllers.launch" />
   <include file="$(find rosetta)/launch/rosetta.launch" />
-  <include file="$(find calypso_pose_estimator)/launch/pose_estimator.launch" />
-  <include file="$(find calypso_pid_beta)/launch/pid.launch" />
+  <!-- <include file="$(find calypso_pid_beta)/launch/pid.launch" /> -->
 
 </launch>

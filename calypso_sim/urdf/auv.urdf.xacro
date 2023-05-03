@@ -1,0 +1,112 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="auv">
+
+    <xacro:include filename="$(find calypso_sim)/urdf/camera2d.urdf.xacro"/>
+    <xacro:include filename="$(find calypso_sim)/urdf/camera_depth.urdf.xacro"/>
+    <xacro:include filename="$(find calypso_sim)/urdf/imu.urdf.xacro"/>
+    <xacro:include filename="$(find calypso_sim)/urdf/thrusters.urdf.xacro"/>
+    <xacro:include filename="$(find calypso_sim)/urdf/chasis.urdf.xacro"/>
+
+    <material name="red">
+        <color rgba="1 0 0 1"/>
+    </material>
+
+    <material name="blue">
+        <color rgba="0 0 0.8 1"/>
+    </material>
+
+    <material name="white">
+        <color rgba="1 1 1 1"/>
+    </material>
+
+     <material name="yellow">
+        <color rgba="1 1 0 1"/>
+    </material>
+
+      <material name="green">
+        <color rgba="0 1 0 1"/>
+    </material>
+
+    <!-- <xacro:property name="x" default="0"/>
+    <xacro:property name="y" default="0"/> -->
+    <xacro:property name="x" default="-0.26"/>
+    <xacro:property name="y" default="0.43"/>
+    <xacro:property name="z" default="0"/>
+    <xacro:property name="r" default="1.57"/>
+    <xacro:property name="p" default="0"/>
+    <xacro:property name="Y" default="0"/>
+
+    <xacro:base_link xyz="0 0 0" rpy="0 1.57 0"></xacro:base_link>
+
+    <!-- 
+// 2:right upper 1->2 
+// 1:left upper  2->1
+// 4:left lower  3->4
+// 3:right lower 4->3 
+// 6->7 
+// 7->8
+// 8->6  
+
+-->
+    <!-- ${x}-0.32 ${y}-0.06 ${z}+0.1 -->
+
+    <xacro:thruster_CCW id="1" parent="base_link" xyz="0.25 0.32 -0.17" rpy="0 0 0" axis="0 0 -1">
+    </xacro:thruster_CCW>
+
+    <xacro:thruster_CW id="2" parent="base_link" xyz="0.25 -0.32 -0.17" rpy="0 0 0" axis="0 0 1">
+    </xacro:thruster_CW>
+
+    <xacro:thruster_CCW id="3" parent="base_link" xyz="-0.25 -0.32 -0.17" rpy="0 0 0" axis="0 0 -1" >
+    </xacro:thruster_CCW>
+
+    <xacro:thruster_CW id="4" parent="base_link" xyz="-0.25 0.32 -0.17" rpy="0 0 0" axis="0 0 1">
+    </xacro:thruster_CW>
+
+    <xacro:thruster_CW id="5" parent="base_link" xyz="0.45 0.2 0" rpy="0 1.57 2.35619" axis="0 0 1">
+    </xacro:thruster_CW>
+
+    <xacro:thruster_CCW id="6" parent="base_link" xyz="0.45 -0.2 0" rpy="0 1.57 3.92" axis="0 0 -1">
+    </xacro:thruster_CCW>
+
+    <xacro:thruster_CW id="7" parent="base_link" xyz="-0.45 -0.2 0" rpy="0 1.57 -0.785398" axis="0 0 1">
+    </xacro:thruster_CW>
+
+    <xacro:thruster_CCW id="8" parent="base_link" xyz="-0.45 0.2 0" rpy="0 1.57 0.785398" axis="0 0 -1">
+    </xacro:thruster_CCW>
+
+    <xacro:imu id="1" parent="base_link" xyz="0 0 0.15" rpy="0 0 -1.57">
+    </xacro:imu>
+
+    <gazebo>
+      <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+          <!-- <robotNameSpace>/Kwad</robotNameSpace> -->
+          <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
+      </plugin>
+    </gazebo>
+
+  <gazebo>
+    <plugin name="freebuoyancy_gazebo" filename="libfreebuoyancy_gazebo.so">
+      <descriptionParam>robot_description</descriptionParam>
+      <alwaysOn>true</alwaysOn>
+      <surface>0 0 40</surface>
+      <updateRate>.001</updateRate>
+
+      <link name='base_link'>
+        <buoyancy>
+          <compensation>0.0</compensation>
+          <origin xyz="0 0 0"/>
+        </buoyancy>
+      </link>
+    </plugin>
+  </gazebo>
+  <!-- <gazebo>
+    <plugin name="BuoyancyPlugin" filename="libBuoyancyPlugin.so">
+    <fluid_density>1000</fluid_density>
+    <link name="base_link">
+      <volume>0.03</volume>
+      <center_of_volume>0 0 0</center_of_volume>
+    </link>
+  </plugin>
+</gazebo> -->
+
+</robot>

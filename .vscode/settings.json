@@ -1,0 +1,12 @@
+{
+  "python.autoComplete.extraPaths": [
+    "/home/dafodilrat/ROS_Workspaces/pid/devel/lib/python3/dist-packages",
+    "/home/dafodilrat/ROS_Workspaces/simulator/devel/lib/python3/dist-packages",
+    "/opt/ros/noetic/lib/python3/dist-packages"
+  ],
+  "python.analysis.extraPaths": [
+    "/home/dafodilrat/ROS_Workspaces/pid/devel/lib/python3/dist-packages",
+    "/home/dafodilrat/ROS_Workspaces/simulator/devel/lib/python3/dist-packages",
+    "/opt/ros/noetic/lib/python3/dist-packages"
+  ]
+}
