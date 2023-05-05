@@ -1,0 +1,5 @@
+<launch>
+
+  <node name="pose_estimator" pkg="calypso_pose_estimator" type="pose.py" output="screen"></node>
+
+</launch>
